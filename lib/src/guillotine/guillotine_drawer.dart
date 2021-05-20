@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-const duration = Duration(milliseconds: 1000);
+const duration = Duration(milliseconds: 600);
 
 class GuillotineDrawer extends StatefulWidget {
   const GuillotineDrawer({
@@ -14,6 +16,8 @@ class GuillotineDrawer extends StatefulWidget {
 class _GuillotineDrawerState extends State<GuillotineDrawer>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
+
+  double value = 0.0;
 
   @override
   void initState() {
@@ -36,14 +40,35 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Container(
-                  width: 150,
-                  height: 250,
-                  color: Colors.red,
+            Expanded(
+              child: Container(
+                color: Colors.purple,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Positioned(
+                      top: 50,
+                      child: Transform(
+                        alignment: Alignment.topLeft,
+                        transform: Matrix4.identity()..rotateZ(-pi * value),
+                        child: Container(
+                          width: 150,
+                          height: 250,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      child: Container(
+                        width: 150,
+                        height: 50,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -56,10 +81,20 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                 width: 50,
                 height: 50,
                 child: Icon(
-                  Icons.menu,
+                  Icons.star,
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 20),
+            Slider(
+              value: value,
+              onChanged: (v) {
+                setState(() {
+                  value = v;
+                });
+              },
+            ),
+            Text('Value $value')
           ],
         ),
       ),
