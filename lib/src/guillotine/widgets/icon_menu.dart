@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DefaultIconMenuAppBar extends StatelessWidget {
-  const DefaultIconMenuAppBar({
+class IconMenuAppBar extends StatelessWidget {
+  const IconMenuAppBar({
     Key? key,
     this.color = Colors.black,
     this.icon = Icons.menu,
