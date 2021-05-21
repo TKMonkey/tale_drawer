@@ -17,7 +17,7 @@ class IconMenuAppBar extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: EdgeInsets.only(left: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Icon(Icons.menu),
         ),
       ),

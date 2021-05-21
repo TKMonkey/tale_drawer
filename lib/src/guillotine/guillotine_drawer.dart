@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/icon_menu.dart';
@@ -11,13 +12,13 @@ class GuillotineDrawer extends StatefulWidget {
   const GuillotineDrawer({
     Key? key,
     this.iconMenu = const IconMenuAppBar(),
-    this.left = false,
+    this.leftSide = true,
     this.startOpen = false,
     this.rotateIconMenu = true,
   }) : super(key: key);
 
   final Widget iconMenu;
-  final bool left;
+  final bool leftSide;
   final bool startOpen;
   final bool rotateIconMenu;
 
@@ -29,6 +30,8 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   double value = 0.0;
+  double position = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +40,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
       duration: duration,
     );
 
-    if (widget.startOpen) {
+    if (!widget.startOpen) {
       animationController.value = 1.0;
       value = 1.0;
     }
@@ -50,6 +53,10 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     final w = 220.0;
     final b = MediaQuery.of(context).padding.top + kToolbarHeight;
 
+    if (!widget.leftSide) {
+      position = w;
+    }
+
     print('msg =  $b ${b / h}');
 
     return Container(
@@ -61,30 +68,49 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
               children: [
                 Positioned(
                   top: 0,
-                  left: -b,
+                  left: widget.leftSide ? -b : null,
+                  right: !widget.leftSide ? -b : null,
                   child: Transform.rotate(
-                    alignment: Alignment(-b / w, -1),
-                    angle: -pi * animationController.value / 2,
-                    child: Row(
-                      children: [
-                        RotatedBox(
-                          quarterTurns: 1,
-                          child: Container(
-                            width: h,
-                            height: b,
-                            color: Colors.blue,
+                    alignment: AlignmentDirectional(b / w, -1),
+                    angle: pi * animationController.value / 2,
+                    child: SizedBox(
+                      width: w + b,
+                      height: h,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 0,
+                            left: widget.leftSide ? b : null,
+                            right: !widget.leftSide ? b : null,
+                            child: Container(
+                              width: w,
+                              height: h,
+                              color: Colors.red,
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: w,
-                          height: h,
-                          color: Colors.red,
-                        ),
-                      ],
+                          Positioned(
+                            left: widget.leftSide ? 0.0 : null,
+                            right: !widget.leftSide ? 0.0 : null,
+                            child: RotatedBox(
+                              quarterTurns: 1,
+                              child: Container(
+                                width: h,
+                                height: b,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-                Align(child: widget.iconMenu),
+                Positioned(
+                  top: 0,
+                  left: widget.leftSide ? 0.0 : null,
+                  right: !widget.leftSide ? 0.0 : null,
+                  child: widget.iconMenu,
+                ),
               ],
             ),
           ),

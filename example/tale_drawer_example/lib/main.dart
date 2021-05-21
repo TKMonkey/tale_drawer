@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: Scaffold(
         body: HomePage(),
@@ -22,7 +23,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GuillotineDrawer(
-      startOpen: true,
+      startOpen: false,
+      leftSide: false,
     );
   }
 }
