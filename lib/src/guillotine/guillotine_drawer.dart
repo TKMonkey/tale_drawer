@@ -33,7 +33,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
   late double delta;
 
   double value = 0.0;
-  double rotation = 1;
+  late double rotation = 1;
 
   @override
   void initState() {
@@ -44,86 +44,76 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
       upperBound: 0.5,
     );
 
-    if (!widget.startOpen) {
-      animationController.value = 1.0;
-      value = animationController.upperBound;
-    }
-
-    if (widget.leftSide) {
-      rotation = -1;
-    }
-
+    animationController.value = widget.startOpen ? 0.0 : 1.0;
+    value = widget.startOpen ? 0.0 : animationController.upperBound;
+    rotation = widget.leftSide ? -1 : 1;
     delta = rotation * pi;
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final h = 420.0;
-    final w = 220.0;
-    final b = MediaQuery.of(context).padding.top + kToolbarHeight;
+    final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
+    final height = size.height;
+    final width = size.width;
+    final barSize = mediaQuery.padding.top + kToolbarHeight;
+    final fixPoint = rotation * (1 - 2 * (barSize / (width + barSize)));
 
-    return Container(
-      color: Colors.orange,
-      child: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 0,
-                  left: widget.leftSide ? -b : null,
-                  right: !widget.leftSide ? -b : null,
-                  child: Transform.rotate(
-                    alignment: AlignmentDirectional(rotation * b / w, -1),
-                    angle: delta * animationController.value,
-                    child: SizedBox(
-                      width: w + b,
-                      height: h,
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            top: 0,
-                            left: widget.leftSide ? b : null,
-                            right: !widget.leftSide ? b : null,
-                            child: Container(
-                              width: w,
-                              height: h,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Positioned(
-                            left: widget.leftSide ? 0.0 : null,
-                            right: !widget.leftSide ? 0.0 : null,
-                            child: RotatedBox(
-                              quarterTurns: 1,
-                              child: Container(
-                                width: h,
-                                height: b,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
-                        ],
+    return Stack(
+      children: [
+        Positioned(
+          top: 0,
+          left: widget.leftSide ? -barSize : null,
+          right: !widget.leftSide ? -barSize : null,
+          child: Transform.rotate(
+            alignment: AlignmentDirectional(fixPoint, -1),
+            angle: delta * animationController.value,
+            child: SizedBox(
+              width: width + barSize,
+              height: height,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 0,
+                    left: widget.leftSide ? barSize : null,
+                    right: !widget.leftSide ? barSize : null,
+                    child: Container(
+                      width: width,
+                      height: height,
+                      color: Colors.red,
+                    ),
+                  ),
+                  Positioned(
+                    left: widget.leftSide ? 0.0 : null,
+                    right: !widget.leftSide ? 0.0 : null,
+                    child: RotatedBox(
+                      quarterTurns: 1,
+                      child: Container(
+                        width: height,
+                        height: barSize,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 0,
-                  left: widget.leftSide ? 0.0 : null,
-                  right: !widget.leftSide ? 0.0 : null,
-                  child: SafeArea(
-                    child: Transform.rotate(
-                      angle: iconRotateAngle,
-                      child: widget.iconMenu,
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          Row(
+        ),
+        Positioned(
+          top: 0,
+          left: widget.leftSide ? 0.0 : null,
+          right: !widget.leftSide ? 0.0 : null,
+          child: SafeArea(
+            child: Transform.rotate(
+              angle: iconRotateAngle,
+              child: widget.iconMenu,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          child: Row(
             children: [
               const SizedBox(height: 20),
               ElevatedButton(
@@ -153,9 +143,9 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
               ),
               Text('Value ${value.toStringAsFixed(2)}')
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 

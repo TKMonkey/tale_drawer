@@ -23,8 +23,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GuillotineDrawer(
-      startOpen: false,
-      leftSide: false,
+      startOpen: true,
       rotateIconMenu: false,
     );
   }
