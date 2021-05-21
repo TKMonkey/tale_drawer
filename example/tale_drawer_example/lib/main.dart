@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
     return const GuillotineDrawer(
       startOpen: false,
       leftSide: false,
+      rotateIconMenu: false,
     );
   }
 }

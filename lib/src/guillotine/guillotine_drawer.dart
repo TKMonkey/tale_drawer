@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,10 @@ class GuillotineDrawer extends StatefulWidget {
 class _GuillotineDrawerState extends State<GuillotineDrawer>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
+  late double delta;
+
   double value = 0.0;
-  double position = 0.0;
+  double rotation = 1;
 
   @override
   void initState() {
@@ -38,12 +41,19 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     animationController = AnimationController(
       vsync: this,
       duration: duration,
+      upperBound: 0.5,
     );
 
     if (!widget.startOpen) {
       animationController.value = 1.0;
-      value = 1.0;
+      value = animationController.upperBound;
     }
+
+    if (widget.leftSide) {
+      rotation = -1;
+    }
+
+    delta = rotation * pi;
   }
 
   @override
@@ -52,12 +62,6 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     final h = 420.0;
     final w = 220.0;
     final b = MediaQuery.of(context).padding.top + kToolbarHeight;
-
-    if (!widget.leftSide) {
-      position = w;
-    }
-
-    print('msg =  $b ${b / h}');
 
     return Container(
       color: Colors.orange,
@@ -71,8 +75,8 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                   left: widget.leftSide ? -b : null,
                   right: !widget.leftSide ? -b : null,
                   child: Transform.rotate(
-                    alignment: AlignmentDirectional(b / w, -1),
-                    angle: pi * animationController.value / 2,
+                    alignment: AlignmentDirectional(rotation * b / w, -1),
+                    angle: delta * animationController.value,
                     child: SizedBox(
                       width: w + b,
                       height: h,
@@ -109,7 +113,12 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                   top: 0,
                   left: widget.leftSide ? 0.0 : null,
                   right: !widget.leftSide ? 0.0 : null,
-                  child: widget.iconMenu,
+                  child: SafeArea(
+                    child: Transform.rotate(
+                      angle: iconRotateAngle,
+                      child: widget.iconMenu,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -134,6 +143,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
               const SizedBox(height: 20),
               Slider(
                 value: value,
+                max: animationController.upperBound,
                 onChanged: (v) {
                   setState(() {
                     value = v;
@@ -148,6 +158,10 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
       ),
     );
   }
+
+  double get iconRotateAngle => widget.rotateIconMenu
+      ? -delta * (animationController.upperBound - animationController.value)
+      : 0.0;
 }
 
 // RotatedBox(

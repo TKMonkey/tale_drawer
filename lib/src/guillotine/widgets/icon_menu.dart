@@ -14,12 +14,9 @@ class IconMenuAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Align(
       alignment: Alignment.centerLeft,
-      child: SafeArea(
-        bottom: false,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Icon(Icons.menu),
-        ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        child: Icon(Icons.menu),
       ),
     );
   }
