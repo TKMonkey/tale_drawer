@@ -4,6 +4,7 @@ include: package:lint/analysis_options_package.yaml
 analyzer:
   exclude:
     - example/**
+    - example/tale_drawer_example/**
 
 linter:
   rules: 

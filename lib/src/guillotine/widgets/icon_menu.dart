@@ -12,12 +12,6 @@ class IconMenuAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
-        child: Icon(Icons.menu),
-      ),
-    );
+    return const Icon(Icons.menu, color: Colors.white);
   }
 }
