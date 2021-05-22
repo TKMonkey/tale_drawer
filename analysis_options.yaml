@@ -1,19 +1,15 @@
 include: package:lint/analysis_options_package.yaml
 
-
 analyzer:
-  exclude:
-    - example/**
-    - example/tale_drawer_example/**
+  # exclude:
+  #   - example/**
+  #   - example/tale_drawer_example/**
 
-linter:
-  rules: 
-    use_key_in_widget_constructors: true
-    prefer_const_constructors: true
-    sort_pub_dependencies: false
-    constant_identifier_names: false
-    avoid_positional_boolean_parameters: false
-    prefer_initializing_formals: false
-    use_setters_to_change_properties: false
-    sort_unnamed_constructors_first: false
-  
+  errors:
+    prefer_const_constructors: ignore
+    sort_pub_dependencies: ignore
+    constant_identifier_names: ignore
+    avoid_positional_boolean_parameters: ignore
+    prefer_initializing_formals: ignore
+    use_setters_to_change_properties: ignore
+    sort_unnamed_constructors_first: ignore
