@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tale_drawer/src/guillotine/guillotine_states.dart';
+import 'package:tale_drawer/tale_drawer.dart';
 
 import 'widget/app_bar_widget.dart';
 import 'widget/content_widget.dart';
@@ -18,11 +19,7 @@ class GuillotineDrawer extends StatefulWidget {
     this.body = const SizedBox(),
     this.drawerContent = const SizedBox(),
     this.backgroundColor = const Color(0xff2E2C3C),
-    this.duration = const Duration(milliseconds: 700),
-    this.sideState = SideState.LEFT,
-    this.drawerState = DrawerState.CLOSED,
-    this.rotateIconMenu = true,
-    this.hideAppBar = true,
+    this.settings = const GuillotineAnimationSettings(),
     this.onOpen,
     this.onClose,
     this.controller,
@@ -33,11 +30,7 @@ class GuillotineDrawer extends StatefulWidget {
   final Widget body;
   final Widget drawerContent;
   final Color backgroundColor;
-  final Duration duration;
-  final SideState sideState;
-  final DrawerState drawerState;
-  final bool rotateIconMenu;
-  final bool hideAppBar;
+  final GuillotineAnimationSettings settings;
   final VoidCallback? onOpen;
   final VoidCallback? onClose;
   final GuillotineController? controller;
@@ -66,7 +59,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: widget.duration,
+      duration: widget.settings.duration,
     )..addStatusListener(statusListener);
 
     initControllFlags();
@@ -98,7 +91,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                   barSize: barSize,
                   width: width,
                   height: height,
-                  hideAppBar: widget.hideAppBar,
+                  hideAppBar: widget.settings.hideAppBar,
                   leftSide: leftSide,
                   backgroundColor: widget.backgroundColor,
                 ),
@@ -113,7 +106,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                     barSize: barSize,
                     width: width,
                     height: height,
-                    hideAppBar: widget.hideAppBar,
+                    hideAppBar: widget.settings.hideAppBar,
                     delta: delta,
                     leftSide: leftSide,
                   ),
@@ -126,7 +119,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
               child: MenuIconWidget(
                 animationIcon: animationIcon,
                 iconMenu: widget.iconMenu,
-                rotateIconMenu: widget.rotateIconMenu,
+                rotateIconMenu: widget.settings.rotateIconMenu,
                 delta: delta,
               ),
             ),
@@ -146,15 +139,19 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     animationGuillotine = Tween(begin: delta / 2, end: 0.0).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(0.3, 1.0, curve: Curves.bounceOut),
-        reverseCurve: Curves.bounceIn,
+        curve: Interval(
+          0.3,
+          1.0,
+          curve: widget.settings.guillotineCurveOut,
+        ),
+        reverseCurve: widget.settings.guillotineCurveIn,
       ),
     );
 
     animationIcon = Tween(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: Curves.linear,
+        curve: widget.settings.iconCurve,
       ),
     );
 
@@ -176,8 +173,8 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
   }
 
   void initControllFlags() {
-    leftSide = widget.sideState == SideState.LEFT;
-    startOpen = widget.drawerState == DrawerState.OPEN;
+    leftSide = widget.settings.sideState == SideState.LEFT;
+    startOpen = widget.settings.drawerState == DrawerState.OPEN;
 
     animationController.value = !startOpen ? 0.0 : 1.0;
     rotation = leftSide ? -1 : 1;
