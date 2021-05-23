@@ -42,10 +42,10 @@ class GuillotineExamplePage extends StatelessWidget {
             print('OnClose');
           },
         ),
-        Positioned(
-          bottom: 0,
-          child: SlideWidget(controller: controller),
-        )
+        // Positioned(
+        //   bottom: 0,
+        //   child: SlideWidget(controller: controller),
+        // )
       ],
     );
   }

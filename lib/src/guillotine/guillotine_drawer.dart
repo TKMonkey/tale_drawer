@@ -61,6 +61,8 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
 
   double rotation = 1;
 
+  double value = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -71,6 +73,8 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
 
     initControllFlags();
     initAnimations();
+
+    value = !startOpen ? 0.0 : animationController.upperBound;
 
     widget.controller?._addState(this);
   }
@@ -124,6 +128,40 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                 delta: delta,
               ),
             ),
+            Positioned(
+              bottom: 0,
+              child: Row(
+                children: [
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      primary: Colors.blue,
+                    ),
+                    child: const SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Icon(
+                        Icons.star,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Slider(
+                    value: value,
+                    max: animationController.upperBound,
+                    onChanged: (v) {
+                      setState(() {
+                        value = v;
+                        animationController.value = v;
+                      });
+                    },
+                  ),
+                  Text('Value ${value.toStringAsFixed(2)}')
+                ],
+              ),
+            )
           ],
         ),
       ),
