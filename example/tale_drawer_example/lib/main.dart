@@ -10,14 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        // appBar: AppBar(
-        //   leading: Icon(Icons.menu),
-        //   title: Text('James'),
-        // ),
-        body: HomePage(),
-      ),
+      home: HomePage(),
     );
   }
 }
