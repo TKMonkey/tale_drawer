@@ -35,5 +35,5 @@ class MenuIconWidget extends StatelessWidget {
   }
 
   double get iconRotateAngle =>
-      rotateIconMenu ? -delta * animationIcon.value / 2 : 0.0;
+      rotateIconMenu ? -delta * animationIcon.value : 0.0;
 }

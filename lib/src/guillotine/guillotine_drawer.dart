@@ -84,12 +84,12 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     final barSize = noBar ? 0.0 : mediaQuery.padding.top + kToolbarHeight;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          widget.body,
-          AnimatedBuilder(
-            animation: animationController,
-            builder: (context, child) => Stack(
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) => Stack(
+          children: [
+            widget.body,
+            Stack(
               children: [
                 ContentWidget(
                   drawerContent: widget.drawerContent,
@@ -114,18 +114,18 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
                 ),
               ],
             ),
-          ),
-          Positioned(
-            left: leftSide ? 0.0 : null,
-            right: !leftSide ? 0.0 : null,
-            child: MenuIconWidget(
-              animationIcon: animationIcon,
-              iconMenu: widget.iconMenu,
-              rotateIconMenu: widget.rotateIconMenu,
-              delta: delta,
+            Positioned(
+              left: leftSide ? 0.0 : null,
+              right: !leftSide ? 0.0 : null,
+              child: MenuIconWidget(
+                animationIcon: animationIcon,
+                iconMenu: widget.iconMenu,
+                rotateIconMenu: widget.rotateIconMenu,
+                delta: delta,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -145,7 +145,12 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
       ),
     );
 
-    animationIcon = Tween(begin: 0.0, end: 1.0).animate(animationController);
+    animationIcon = Tween(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.linear,
+      ),
+    );
 
     animationAppBarOppacity = Tween(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
