@@ -2,33 +2,128 @@ import 'package:flutter/material.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
 class GuillotineExamplePage extends StatelessWidget {
-  const GuillotineExamplePage({
+  GuillotineExamplePage({
     Key? key,
   }) : super(key: key);
 
+  final controller = GuillotineController();
+
   @override
   Widget build(BuildContext context) {
-    return GuillotineDrawer(
-        backgroundColor: const Color(0xff2E2C3C),
-        appBar: const AppBarWidget(),
-        iconMenu: const Icon(
-          Icons.menu_sharp,
-          color: Colors.white,
-        ),
-        body: Container(
-          child: const Center(
-            child: Text(
-              'Body Example',
+    return Stack(
+      children: [
+        GuillotineDrawer(
+          controller: controller,
+          backgroundColor: const Color(0xff2E2C3C),
+          sideState: SideState.LEFT,
+          drawerState: DrawerState.OPEN,
+          appBar: const AppBarWidget(),
+          iconMenu: GestureDetector(
+            onTap: () {
+              controller.start();
+            },
+            child: const Icon(
+              Icons.menu_sharp,
+              color: Colors.white,
             ),
           ),
+          body: Container(
+            child: const Center(
+              child: Text(
+                'Body Example',
+              ),
+            ),
+          ),
+          drawerContent: const ContentWidget(),
+          onOpen: () {
+            print('OnOpen');
+          },
+          onClose: () {
+            print('OnClose');
+          },
         ),
-        drawerContent: const ContentWidget(),
-        onOpen: () {
-          print('OnOpen');
-        },
-        onClose: () {
-          print('OnClose');
-        });
+        Positioned(
+          bottom: 0,
+          child: SlideWidget(controller: controller),
+        )
+      ],
+    );
+  }
+}
+
+class SlideWidget extends StatelessWidget {
+  const SlideWidget({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  final GuillotineController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Row(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              controller.open();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: Colors.blue,
+            ),
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: Column(
+                children: [
+                  Icon(Icons.open_in_browser),
+                  Text('Open'),
+                ],
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              controller.close();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: Colors.blue,
+            ),
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: Column(
+                children: [
+                  Icon(Icons.close),
+                  Text('Close'),
+                ],
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              controller.start();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const CircleBorder(),
+              primary: Colors.blue,
+            ),
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: Column(
+                children: [
+                  Icon(Icons.play_arrow),
+                  Text('Start'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
