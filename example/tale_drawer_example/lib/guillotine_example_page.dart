@@ -16,7 +16,8 @@ class GuillotineExamplePage extends StatelessWidget {
           controller: controller,
           backgroundColor: const Color(0xff2E2C3C),
           sideState: SideState.LEFT,
-          drawerState: DrawerState.OPEN,
+          drawerState: DrawerState.CLOSED,
+          // hideAppBar: false,
           appBar: const AppBarWidget(),
           iconMenu: GestureDetector(
             onTap: () {
@@ -42,10 +43,10 @@ class GuillotineExamplePage extends StatelessWidget {
             print('OnClose');
           },
         ),
-        // Positioned(
-        //   bottom: 0,
-        //   child: SlideWidget(controller: controller),
-        // )
+        Positioned(
+          bottom: 0,
+          child: SlideWidget(controller: controller),
+        )
       ],
     );
   }
@@ -104,6 +105,8 @@ class SlideWidget extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
+              print('before start isOpen: ${controller.isDrawerOpen}');
+              print('before start isClosed: ${controller.isDrawerClosed}');
               controller.start();
             },
             style: ElevatedButton.styleFrom(

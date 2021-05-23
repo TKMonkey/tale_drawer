@@ -10,6 +10,7 @@ class ContentWidget extends StatelessWidget {
     required this.width,
     required this.height,
     required this.hideAppBar,
+    required this.leftSide,
     required this.backgroundColor,
   }) : super(key: key);
 
@@ -20,6 +21,7 @@ class ContentWidget extends StatelessWidget {
   final double width;
   final double height;
   final bool hideAppBar;
+  final bool leftSide;
   final Color backgroundColor;
 
   @override
@@ -27,7 +29,7 @@ class ContentWidget extends StatelessWidget {
     return Transform.rotate(
       angle: animationGuillotine.value,
       origin: Offset(0, barSize),
-      alignment: Alignment.topLeft,
+      alignment: leftSide ? Alignment.topLeft : Alignment.topRight,
       child: SizedBox(
         width: width,
         height: height,

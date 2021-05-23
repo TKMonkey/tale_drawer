@@ -12,6 +12,7 @@ class AppbarWidget extends StatelessWidget {
     required this.height,
     required this.hideAppBar,
     required this.delta,
+    required this.leftSide,
   }) : super(key: key);
 
   final Widget? appBar;
@@ -23,17 +24,19 @@ class AppbarWidget extends StatelessWidget {
   final double height;
   final bool hideAppBar;
   final double delta;
+  final bool leftSide;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: !noBar,
       child: FadeTransition(
-        opacity: animationAppBarOppacity,
+        opacity:
+            hideAppBar ? animationAppBarOppacity : kAlwaysCompleteAnimation,
         child: Transform.rotate(
           angle: appBarRotateAngle,
           origin: Offset(0, barSize),
-          alignment: Alignment.topLeft,
+          alignment: leftSide ? Alignment.topLeft : Alignment.topRight,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: barSize),
             child: RotatedBox(
@@ -43,13 +46,16 @@ class AppbarWidget extends StatelessWidget {
                 height: barSize,
                 child: FittedBox(
                   alignment: Alignment.topLeft,
-                  child: SizedBox(
-                    width: width,
-                    height: barSize,
-                    child: SafeArea(
-                      bottom: false,
-                      child: Center(
-                        child: appBar,
+                  child: RotatedBox(
+                    quarterTurns: leftSide ? 0 : 2,
+                    child: SizedBox(
+                      width: width,
+                      height: barSize,
+                      child: SafeArea(
+                        bottom: false,
+                        child: Center(
+                          child: appBar,
+                        ),
                       ),
                     ),
                   ),
