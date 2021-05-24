@@ -15,9 +15,6 @@ class GuillotineExamplePage extends StatelessWidget {
         GuillotineDrawer(
           controller: controller,
           backgroundColor: const Color(0xff2E2C3C),
-          sideState: SideState.LEFT,
-          drawerState: DrawerState.CLOSED,
-          // hideAppBar: false,
           appBar: const AppBarWidget(),
           iconMenu: GestureDetector(
             onTap: () {

@@ -1,8 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
-class GuillotineAnimationSettings {
-  const GuillotineAnimationSettings({
+class GuillotineSettings {
+  const GuillotineSettings({
     this.duration = const Duration(milliseconds: 700),
     this.iconCurve = Curves.linear,
     this.guillotineCurveIn = Curves.bounceIn,

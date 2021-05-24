@@ -19,7 +19,7 @@ class GuillotineDrawer extends StatefulWidget {
     this.body = const SizedBox(),
     this.drawerContent = const SizedBox(),
     this.backgroundColor = const Color(0xff2E2C3C),
-    this.settings = const GuillotineAnimationSettings(),
+    this.settings = const GuillotineSettings(),
     this.onOpen,
     this.onClose,
     this.controller,
@@ -30,7 +30,7 @@ class GuillotineDrawer extends StatefulWidget {
   final Widget body;
   final Widget drawerContent;
   final Color backgroundColor;
-  final GuillotineAnimationSettings settings;
+  final GuillotineSettings settings;
   final VoidCallback? onOpen;
   final VoidCallback? onClose;
   final GuillotineController? controller;
