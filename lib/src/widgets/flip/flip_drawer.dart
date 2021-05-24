@@ -20,6 +20,7 @@ class FlipDrawer extends StatefulWidget {
     this.drawerState = DrawerState.CLOSED,
     this.drawerWidth = 250.0,
     this.flipMaxValue = 0.95,
+    this.toggleToClose = true,
     this.type = DrawerAnimation.FLIP,
     this.listener,
     this.controller,
@@ -33,6 +34,7 @@ class FlipDrawer extends StatefulWidget {
   final DrawerState drawerState;
   final double drawerWidth;
   final double flipMaxValue;
+  final bool toggleToClose;
   final DrawerAnimation type;
   final DrawerListener? listener;
   final TaleDrawerController? controller;
@@ -71,29 +73,40 @@ class _FlipDrawerState extends State<FlipDrawer>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          DrawerContentWidget(
-            animationTranslate: animationTranslate,
-            animationFlip: animationFlip,
-            type: widget.type,
-            delta: delta,
-            rotate: rotate,
-            leftSide: leftSide,
-            drawerWidth: widget.drawerWidth,
-            wSize: wSize,
-            translate: translate,
-            drawerContent: widget.drawer,
-          ),
-          BodyWidget(
-            animationTranslate: animationTranslate,
-            animationFlip: animationFlip,
-            delta: delta,
-            drawerWidth: widget.drawerWidth,
-            leftSide: leftSide,
-            body: widget.body,
-          ),
-        ],
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) => Stack(
+          children: [
+            DrawerContentWidget(
+              animationTranslate: animationTranslate,
+              animationFlip: animationFlip,
+              type: widget.type,
+              delta: delta,
+              rotate: rotate,
+              leftSide: leftSide,
+              drawerWidth: widget.drawerWidth,
+              wSize: wSize,
+              translate: translate,
+              drawerContent: widget.drawer,
+            ),
+            GestureDetector(
+              onTap: () {
+                if (isDrawerOpen && widget.toggleToClose) {
+                  start();
+                }
+              },
+              behavior: HitTestBehavior.translucent,
+              child: BodyWidget(
+                animationTranslate: animationTranslate,
+                animationFlip: animationFlip,
+                delta: delta,
+                drawerWidth: widget.drawerWidth,
+                leftSide: leftSide,
+                body: widget.body,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
