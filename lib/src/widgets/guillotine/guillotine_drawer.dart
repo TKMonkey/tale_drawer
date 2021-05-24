@@ -4,12 +4,13 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tale_drawer/src/guillotine/guillotine_states.dart';
+import 'package:tale_drawer/src/drawer_states.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
-import 'widget/app_bar_widget.dart';
-import 'widget/content_widget.dart';
-import 'widget/menu_icon_widget.dart';
+import 'components/app_bar_widget.dart';
+import 'components/content_widget.dart';
+import 'components/menu_icon_widget.dart';
+import 'guillotine_settings.dart';
 
 class GuillotineDrawer extends StatefulWidget {
   const GuillotineDrawer({

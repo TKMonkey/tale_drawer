@@ -52,16 +52,16 @@ class _PerspectiveDrawerPageState extends State<PerspectiveDrawerPage>
           return Scaffold(
             body: Stack(
               children: [
-                // Transform.translate(
-                //   offset: Offset(maxSlide * (animationController.value - 1), 0),
-                //   child: Transform(
-                //     transform: Matrix4.identity()
-                //       ..setEntry(3, 2, 0.001)
-                //       ..rotateY(math.pi / 2 * (1 - animationController.value)),
-                //     alignment: Alignment.centerRight,
-                //     child: _MyDrawer(),
-                //   ),
-                // ),
+                Transform.translate(
+                  offset: Offset(maxSlide * (animationController.value - 1), 0),
+                  child: Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(math.pi / 2 * (1 - animationController.value)),
+                    alignment: Alignment.centerRight,
+                    child: _MyDrawer(),
+                  ),
+                ),
                 Transform.translate(
                   offset: Offset(maxSlide * animationController.value, 0),
                   child: Transform(
