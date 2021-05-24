@@ -1,4 +1,4 @@
-enum DrawerAnimationType {
+enum DrawerAnimation {
   STATIC,
   TRANSLATE,
   FLIP,

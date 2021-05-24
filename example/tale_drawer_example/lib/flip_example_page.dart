@@ -8,8 +8,14 @@ class FlipExamplePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        // body: FlipDrawer(),
-        );
+    return FlipDrawer(
+      body: Container(
+        child: Text('James'),
+      ),
+      drawer: Container(
+        child: Text('James'),
+      ),
+      type: DrawerAnimation.TRANSLATE,
+    );
   }
 }
