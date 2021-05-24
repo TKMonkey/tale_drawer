@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ContentWidget extends StatelessWidget {
-  const ContentWidget({
+class DrawerContentWidget extends StatelessWidget {
+  const DrawerContentWidget({
     Key? key,
     required this.drawerContent,
     required this.animationGuillotine,

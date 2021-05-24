@@ -10,14 +10,16 @@ class FlipExamplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlipDrawer(
       body: Container(
+        color: Colors.red,
         child: Text('James'),
       ),
       drawer: Container(
+        color: Colors.amber,
         child: Text('James'),
       ),
-      type: DrawerAnimation.FLIP,
+      type: DrawerAnimation.STATIC,
       drawerState: DrawerState.CLOSED,
-      sideState: SideState.LEFT,
+      sideState: SideState.RIGHT,
     );
   }
 }

@@ -6,6 +6,8 @@ import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
 import 'package:tale_drawer/src/drawer_states.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
+import 'components/body_component.dart';
+import 'components/drawer_content_component.dart';
 import 'drawer_animation.dart';
 
 class FlipDrawer extends StatefulWidget {
@@ -42,10 +44,10 @@ class FlipDrawer extends StatefulWidget {
 class _FlipDrawerState extends State<FlipDrawer>
     with SingleTickerProviderStateMixin, ControllerMethods {
   late Animation<double> animationFlip;
+  late Animation<double> animationTranslate;
 
-  double value = 0.0;
-  double staticAnimation = 1.0;
-  double translateAnimation = 1.0;
+  double rotate = 1.0;
+
   late bool leftSide;
   late bool startOpen;
   late double delta;
@@ -58,7 +60,7 @@ class _FlipDrawerState extends State<FlipDrawer>
     animationController = AnimationController(
       vsync: this,
       duration: widget.duration,
-    );
+    )..addStatusListener((s) => statusListener(s, widget.listener));
 
     initControllFlags();
     initAnimations();
@@ -68,87 +70,28 @@ class _FlipDrawerState extends State<FlipDrawer>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
-          Transform.translate(
-            offset: Offset(
-              (wSize * size.width) -
-                  -delta *
-                      widget.drawerWidth *
-                      (animationController.value - 1 * translate) *
-                      staticAnimation,
-              0,
-            ),
-            child: Transform(
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(delta *
-                    animationFlip.value *
-                    (1 - animationController.value) *
-                    staticAnimation *
-                    translateAnimation),
-              alignment:
-                  leftSide ? Alignment.centerRight : Alignment.centerLeft,
-              child: Container(
-                width: widget.drawerWidth,
-                height: size.height,
-                color: Colors.red,
-              ),
-            ),
+          DrawerContentWidget(
+            animationTranslate: animationTranslate,
+            animationFlip: animationFlip,
+            type: widget.type,
+            delta: delta,
+            rotate: rotate,
+            leftSide: leftSide,
+            drawerWidth: widget.drawerWidth,
+            wSize: wSize,
+            translate: translate,
+            drawerContent: widget.drawer,
           ),
-          Transform.translate(
-            offset: Offset(
-              delta * widget.drawerWidth * animationController.value,
-              0,
-            ),
-            child: Transform(
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(-delta * animationFlip.value),
-              alignment:
-                  leftSide ? Alignment.centerLeft : Alignment.centerRight,
-              child: Container(
-                width: size.width,
-                height: size.height,
-                color: Colors.amber,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Row(
-              children: [
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    primary: Colors.blue,
-                  ),
-                  child: const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Icon(
-                      Icons.star,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Slider(
-                  value: value,
-                  max: animationController.upperBound,
-                  onChanged: (v) {
-                    setState(() {
-                      value = v;
-                      animationController.value = v;
-                    });
-                  },
-                ),
-                Text('Value ${value.toStringAsFixed(2)}')
-              ],
-            ),
+          BodyWidget(
+            animationTranslate: animationTranslate,
+            animationFlip: animationFlip,
+            delta: delta,
+            drawerWidth: widget.drawerWidth,
+            leftSide: leftSide,
+            body: widget.body,
           ),
         ],
       ),
@@ -169,24 +112,24 @@ class _FlipDrawerState extends State<FlipDrawer>
         curve: Curves.easeIn,
       ),
     );
+
+    animationTranslate = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.linear,
+    );
   }
 
   void initControllFlags() {
     leftSide = widget.sideState == SideState.LEFT;
     startOpen = widget.drawerState == DrawerState.OPEN;
     animationController.value = !startOpen ? 0.0 : 1.0;
-    value = !startOpen ? 0.0 : 1.0;
 
     delta = leftSide ? 1.0 : -1.0;
     translate = leftSide ? 1.0 : 0.0;
-    // wSize = leftSide ? 0.0 : 1.0;
     wSize = delta * translate - delta;
-    print('msg  + $wSize');
 
-    if (widget.type == DrawerAnimation.STATIC) {
-      staticAnimation = 0.0;
-    } else if (widget.type == DrawerAnimation.TRANSLATE) {
-      translateAnimation = 0.0;
+    if (widget.type != DrawerAnimation.FLIP) {
+      rotate = 0.0;
     }
   }
 }
