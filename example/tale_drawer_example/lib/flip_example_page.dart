@@ -16,7 +16,8 @@ class FlipExamplePage extends StatelessWidget {
         child: Text('James'),
       ),
       type: DrawerAnimation.FLIP,
-      drawerState: DrawerState.OPEN,
+      drawerState: DrawerState.CLOSED,
+      sideState: SideState.LEFT,
     );
   }
 }

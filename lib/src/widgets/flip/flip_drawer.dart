@@ -48,6 +48,9 @@ class _FlipDrawerState extends State<FlipDrawer>
   double translateAnimation = 1.0;
   late bool leftSide;
   late bool startOpen;
+  late double delta;
+  late double translate;
+  late double wSize;
 
   @override
   void initState() {
@@ -71,19 +74,23 @@ class _FlipDrawerState extends State<FlipDrawer>
         children: [
           Transform.translate(
             offset: Offset(
-              widget.drawerWidth *
-                  (animationController.value - 1) *
-                  staticAnimation,
+              (wSize * size.width) -
+                  -delta *
+                      widget.drawerWidth *
+                      (animationController.value - 1 * translate) *
+                      staticAnimation,
               0,
             ),
             child: Transform(
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001)
-                ..rotateY(animationFlip.value *
+                ..rotateY(delta *
+                    animationFlip.value *
                     (1 - animationController.value) *
                     staticAnimation *
                     translateAnimation),
-              alignment: Alignment.centerRight,
+              alignment:
+                  leftSide ? Alignment.centerRight : Alignment.centerLeft,
               child: Container(
                 width: widget.drawerWidth,
                 height: size.height,
@@ -93,14 +100,15 @@ class _FlipDrawerState extends State<FlipDrawer>
           ),
           Transform.translate(
             offset: Offset(
-              widget.drawerWidth * animationController.value,
+              delta * widget.drawerWidth * animationController.value,
               0,
             ),
             child: Transform(
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001)
-                ..rotateY(-animationFlip.value),
-              alignment: Alignment.centerLeft,
+                ..rotateY(-delta * animationFlip.value),
+              alignment:
+                  leftSide ? Alignment.centerLeft : Alignment.centerRight,
               child: Container(
                 width: size.width,
                 height: size.height,
@@ -168,6 +176,12 @@ class _FlipDrawerState extends State<FlipDrawer>
     startOpen = widget.drawerState == DrawerState.OPEN;
     animationController.value = !startOpen ? 0.0 : 1.0;
     value = !startOpen ? 0.0 : 1.0;
+
+    delta = leftSide ? 1.0 : -1.0;
+    translate = leftSide ? 1.0 : 0.0;
+    // wSize = leftSide ? 0.0 : 1.0;
+    wSize = delta * translate - delta;
+    print('msg  + $wSize');
 
     if (widget.type == DrawerAnimation.STATIC) {
       staticAnimation = 0.0;
