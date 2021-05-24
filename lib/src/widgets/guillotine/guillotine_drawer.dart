@@ -4,7 +4,10 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:tale_drawer/src/controller/drawer_controller.dart';
+import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
 import 'package:tale_drawer/src/drawer_states.dart';
+import 'package:tale_drawer/src/misc/drawer_listener.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
 import 'components/app_bar_widget.dart';
@@ -18,31 +21,28 @@ class GuillotineDrawer extends StatefulWidget {
     this.iconMenu,
     this.appBar,
     this.body = const SizedBox(),
-    this.drawerContent = const SizedBox(),
+    this.drawer = const SizedBox(),
     this.backgroundColor = const Color(0xff2E2C3C),
     this.settings = const GuillotineSettings(),
-    this.onOpen,
-    this.onClose,
+    this.listener,
     this.controller,
   }) : super(key: key);
 
   final Widget? appBar;
   final Widget? iconMenu;
   final Widget body;
-  final Widget drawerContent;
+  final Widget drawer;
   final Color backgroundColor;
   final GuillotineSettings settings;
-  final VoidCallback? onOpen;
-  final VoidCallback? onClose;
-  final GuillotineController? controller;
+  final DrawerListener? listener;
+  final TaleDrawerController? controller;
 
   @override
   _GuillotineDrawerState createState() => _GuillotineDrawerState();
 }
 
 class _GuillotineDrawerState extends State<GuillotineDrawer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
+    with SingleTickerProviderStateMixin, ControllerMethods {
   late Animation<double> animationGuillotine;
   late Animation<double> animationIcon;
   late Animation<double> animationAppBarOppacity;
@@ -61,12 +61,12 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     animationController = AnimationController(
       vsync: this,
       duration: widget.settings.duration,
-    )..addStatusListener(statusListener);
+    )..addStatusListener((s) => statusListener(s, widget.listener));
 
     initControllFlags();
     initAnimations();
 
-    widget.controller?._addState(this);
+    widget.controller?.addState(this);
   }
 
   @override
@@ -86,7 +86,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
             Stack(
               children: [
                 ContentWidget(
-                  drawerContent: widget.drawerContent,
+                  drawerContent: widget.drawer,
                   animationGuillotine: animationGuillotine,
                   animationContentOppacity: animationContentOppacity,
                   barSize: barSize,
@@ -182,79 +182,5 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     delta = rotation * pi;
 
     noBar = widget.appBar == null;
-  }
-
-  void statusListener(AnimationStatus status) {
-    if (animationController.status == AnimationStatus.completed) {
-      widget.onOpen?.call();
-    } else if (animationController.status == AnimationStatus.dismissed) {
-      widget.onClose?.call();
-    }
-  }
-
-  void _open() {
-    animationController.forward();
-  }
-
-  //close the panel
-  void _close() {
-    animationController.reverse();
-  }
-
-  void _start() {
-    if (animationController.status == AnimationStatus.completed) {
-      animationController.reverse();
-    } else if (animationController.status == AnimationStatus.dismissed) {
-      animationController.forward();
-    }
-  }
-
-  //returns whether or not the
-  //panel is open
-  bool get _isDrawerOpen => animationController.value == 1.0;
-
-  //returns whether or not the
-  //panel is closed
-  bool get _isDrawerClosed => animationController.value == 0.0;
-}
-
-class GuillotineController {
-  _GuillotineDrawerState? _guillotineState;
-
-  // ignore: use_setters_to_change_properties
-  void _addState(_GuillotineDrawerState guillotineState) {
-    _guillotineState = guillotineState;
-  }
-
-  bool get isAttached => _guillotineState != null;
-
-  void close() {
-    assert(isAttached,
-        'GuillotineController must be attached to a SlidingUpPanel');
-    return _guillotineState!._close();
-  }
-
-  void open() {
-    assert(isAttached,
-        'GuillotineController must be attached to a SlidingUpPanel');
-    return _guillotineState!._open();
-  }
-
-  void start() {
-    assert(isAttached,
-        'GuillotineController must be attached to a SlidingUpPanel');
-    return _guillotineState!._start();
-  }
-
-  bool get isDrawerOpen {
-    assert(isAttached,
-        'GuillotineController must be attached to a SlidingUpPanel');
-    return _guillotineState!._isDrawerOpen;
-  }
-
-  bool get isDrawerClosed {
-    assert(isAttached,
-        'GuillotineController must be attached to a SlidingUpPanel');
-    return _guillotineState!._isDrawerClosed;
   }
 }

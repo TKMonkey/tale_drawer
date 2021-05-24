@@ -6,7 +6,7 @@ class GuillotineExamplePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final controller = GuillotineController();
+  final controller = TaleDrawerController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,15 @@ class GuillotineExamplePage extends StatelessWidget {
               ),
             ),
           ),
-          drawerContent: const ContentWidget(),
-          onOpen: () {
-            print('OnOpen');
-          },
-          onClose: () {
-            print('OnClose');
-          },
+          drawer: const ContentWidget(),
+          listener: DrawerListener(
+            onOpen: () {
+              print('OnOpen');
+            },
+            onClose: () {
+              print('OnClose');
+            },
+          ),
         ),
         Positioned(
           bottom: 0,
@@ -55,7 +57,7 @@ class SlideWidget extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final GuillotineController controller;
+  final TaleDrawerController controller;
 
   @override
   Widget build(BuildContext context) {
