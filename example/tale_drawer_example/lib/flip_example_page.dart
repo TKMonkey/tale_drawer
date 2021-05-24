@@ -15,7 +15,8 @@ class FlipExamplePage extends StatelessWidget {
       drawer: Container(
         child: Text('James'),
       ),
-      type: DrawerAnimation.TRANSLATE,
+      type: DrawerAnimation.FLIP,
+      drawerState: DrawerState.OPEN,
     );
   }
 }

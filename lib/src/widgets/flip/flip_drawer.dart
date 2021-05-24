@@ -1,6 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/controller/drawer_controller.dart';
+import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
+import 'package:tale_drawer/src/drawer_states.dart';
+import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
 import 'drawer_animation.dart';
 
@@ -10,32 +14,40 @@ class FlipDrawer extends StatefulWidget {
     required this.drawer,
     required this.body,
     this.duration = const Duration(milliseconds: 700),
+    this.sideState = SideState.LEFT,
+    this.drawerState = DrawerState.CLOSED,
     this.drawerWidth = 250.0,
     this.flipMaxValue = 0.95,
     this.type = DrawerAnimation.FLIP,
+    this.listener,
+    this.controller,
   })  : assert(flipMaxValue >= 0.75 && flipMaxValue <= 1.0),
         super(key: key);
 
   final Widget drawer;
   final Widget body;
   final Duration duration;
+  final SideState sideState;
+  final DrawerState drawerState;
   final double drawerWidth;
   final double flipMaxValue;
   final DrawerAnimation type;
+  final DrawerListener? listener;
+  final TaleDrawerController? controller;
 
   @override
   _FlipDrawerState createState() => _FlipDrawerState();
 }
 
 class _FlipDrawerState extends State<FlipDrawer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
+    with SingleTickerProviderStateMixin, ControllerMethods {
   late Animation<double> animationFlip;
 
   double value = 0.0;
   double staticAnimation = 1.0;
   double translateAnimation = 1.0;
-  double delta = 0.0;
+  late bool leftSide;
+  late bool startOpen;
 
   @override
   void initState() {
@@ -45,19 +57,10 @@ class _FlipDrawerState extends State<FlipDrawer>
       duration: widget.duration,
     );
 
-    animationFlip =
-        Tween(begin: 0.0, end: widget.flipMaxValue * pi / 2).animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.easeIn,
-      ),
-    );
+    initControllFlags();
+    initAnimations();
 
-    if (widget.type == DrawerAnimation.STATIC) {
-      staticAnimation = 0.0;
-    } else if (widget.type == DrawerAnimation.TRANSLATE) {
-      translateAnimation = 0.0;
-    }
+    widget.controller?.addState(this);
   }
 
   @override
@@ -142,5 +145,34 @@ class _FlipDrawerState extends State<FlipDrawer>
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  void initAnimations() {
+    animationFlip =
+        Tween(begin: 0.0, end: widget.flipMaxValue * pi / 2).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeIn,
+      ),
+    );
+  }
+
+  void initControllFlags() {
+    leftSide = widget.sideState == SideState.LEFT;
+    startOpen = widget.drawerState == DrawerState.OPEN;
+    animationController.value = !startOpen ? 0.0 : 1.0;
+    value = !startOpen ? 0.0 : 1.0;
+
+    if (widget.type == DrawerAnimation.STATIC) {
+      staticAnimation = 0.0;
+    } else if (widget.type == DrawerAnimation.TRANSLATE) {
+      translateAnimation = 0.0;
+    }
   }
 }
