@@ -15,10 +15,9 @@ class GuillotineDrawerWidget extends TaleDrawerState {
   void initAnimations() {}
 
   @override
-  void initControllFlags() {
-    // TODO: implement initControllFlags
-  }
+  void initControllFlags() {}
 
-  // @override
-  // TaleSettings get settings => widget.settings ?? const GuillotineSettings();
+  @override
+  GuillotineSettings get settings =>
+      (widget.settings ?? const GuillotineSettings()) as GuillotineSettings;
 }

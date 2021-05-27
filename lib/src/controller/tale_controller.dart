@@ -35,7 +35,7 @@ class TaleController<State extends AnimationControllerMixin> {
     return _drawerState!.isDrawerClosed;
   }
 
-  double get panelPosition {
+  double get drawerPosition {
     assert(isAttached, "TaleController must be attached to a DrawerWidget");
     return _drawerState!.drawerPosition;
   }

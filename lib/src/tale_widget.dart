@@ -1,6 +1,9 @@
+// import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'config/config.dart';
+
 import 'controller/animation_controller_mixin.dart';
 import 'controller/tale_controller.dart';
 import 'misc/drawer_listener.dart';
@@ -15,6 +18,7 @@ class TaleDrawer extends StatefulWidget {
     required this.type,
     required this.drawer,
     required this.body,
+    this.drawerBackground = const Color(0xff2E2C3C),
     this.sideState = SideState.LEFT,
     this.drawerState = DrawerState.CLOSED,
     this.settings,
@@ -29,6 +33,7 @@ class TaleDrawer extends StatefulWidget {
   final TaleType type;
   final Widget drawer;
   final Widget body;
+  final Color drawerBackground;
   final SideState sideState;
   final DrawerState drawerState;
   final TaleSettings? settings;
@@ -56,14 +61,13 @@ abstract class TaleDrawerState extends State<TaleDrawer>
 
   bool get isLeftSide => widget.sideState == SideState.LEFT;
   bool get isStartedOpen => widget.drawerState == DrawerState.OPEN;
-  late TaleSettings settings;
+  TaleSettings get settings;
 
   late double delta;
 
   @override
   void initState() {
     super.initState();
-    initSettingsValues();
 
     animationController = AnimationController(
       vsync: this,
@@ -86,24 +90,5 @@ abstract class TaleDrawerState extends State<TaleDrawer>
   void dispose() {
     animationController.dispose();
     super.dispose();
-  }
-
-  void initSettingsValues() {
-    if (widget.settings != null) {
-      settings = widget.settings!;
-      return;
-    }
-
-    switch (widget.type) {
-      case TaleType.Flip:
-        settings = const FlipSettings();
-        break;
-      case TaleType.Guillotine:
-        settings = const GuillotineSettings();
-        break;
-      case TaleType.Zoom:
-        settings = const ZoomSettings();
-        break;
-    }
   }
 }

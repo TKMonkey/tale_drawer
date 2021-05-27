@@ -19,4 +19,8 @@ class FlipDrawerWidget extends TaleDrawerState {
   void initControllFlags() {
     // TODO: implement initControllFlags
   }
+
+  @override
+  FlipSettings get settings =>
+      (widget.settings ?? const FlipSettings()) as FlipSettings;
 }
