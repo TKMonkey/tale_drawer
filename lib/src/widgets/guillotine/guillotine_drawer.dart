@@ -141,11 +141,15 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
-          0.3,
-          1.0,
+          0.0,
+          0.8,
           curve: widget.settings.guillotineCurveOut,
         ),
-        reverseCurve: widget.settings.guillotineCurveIn,
+        reverseCurve: Interval(
+          0.0,
+          0.8,
+          curve: widget.settings.guillotineCurveIn,
+        ),
       ),
     );
 
@@ -167,7 +171,7 @@ class _GuillotineDrawerState extends State<GuillotineDrawer>
     animationContentOppacity = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(0.27, 0.8),
+        curve: const Interval(0.27, 0.3),
         reverseCurve: const Interval(0.7, 0.72),
       ),
     );

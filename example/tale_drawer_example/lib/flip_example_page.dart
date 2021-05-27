@@ -43,7 +43,7 @@ class FlipExamplePage extends StatelessWidget {
         child: const ContentWidget(),
       ),
       controller: controller,
-      type: DrawerAnimation.TRANSLATE,
+      type: DrawerAnimation.STATIC,
       drawerState: DrawerState.OPEN,
       sideState: SideState.RIGHT,
       listener: DrawerListener(

@@ -3,7 +3,7 @@ import 'package:tale_drawer/tale_drawer.dart';
 
 class GuillotineSettings {
   const GuillotineSettings({
-    this.duration = const Duration(milliseconds: 700),
+    this.duration = const Duration(milliseconds: 1000),
     this.iconCurve = Curves.linear,
     this.guillotineCurveIn = Curves.bounceIn,
     this.guillotineCurveOut = Curves.bounceOut,

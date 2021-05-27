@@ -19,7 +19,7 @@ class FlipDrawer extends StatefulWidget {
     this.sideState = SideState.LEFT,
     this.drawerState = DrawerState.CLOSED,
     this.drawerWidth = 250.0,
-    this.flipMaxValue = 0.95,
+    this.flipMaxValue = 0.99,
     this.toggleToClose = true,
     this.type = DrawerAnimation.FLIP,
     this.listener,
