@@ -13,7 +13,6 @@ import 'package:tale_drawer/tale_drawer.dart';
 import 'components/app_bar_widget.dart';
 import 'components/drawer_content_widget.dart';
 import 'components/menu_icon_widget.dart';
-import 'guillotine_settings.dart';
 
 class GuillotineDrawer extends StatefulWidget {
   const GuillotineDrawer({

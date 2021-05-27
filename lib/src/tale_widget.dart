@@ -1,49 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:tale_drawer/src/widgets/old/guillotine/guillotine_settings.dart';
 
-import 'config/tale_settings.dart';
-import 'config/tale_style.dart';
+import 'config/config.dart';
 import 'controller/animation_controller_mixin.dart';
+import 'controller/tale_controller.dart';
+import 'misc/drawer_listener.dart';
 
 part 'widgets/flip_drawer_widget.dart';
 part 'widgets/guillotine_drawer_widget.dart';
 part 'widgets/zoom_drawer_widget.dart';
 
-class TaleWidget extends StatefulWidget {
-  const TaleWidget.flip({
+class TaleDrawer extends StatefulWidget {
+  const TaleDrawer({
     Key? key,
+    required this.type,
     required this.drawer,
     required this.body,
-    this.settings = const GuillotineSettings(),
-  })  : type = TaleType.Flip,
+    this.sideState = SideState.LEFT,
+    this.drawerState = DrawerState.CLOSED,
+    this.settings,
+    this.listener,
+    this.controller,
+  })  : assert(settings == null ||
+            (type == TaleType.Flip && settings is FlipSettings) ||
+            (type == TaleType.Guillotine && settings is GuillotineSettings) ||
+            (type == TaleType.Zoom && settings is ZoomSettings)),
         super(key: key);
 
-  const TaleWidget.guillotine({
-    Key? key,
-    required this.drawer,
-    required this.body,
-    this.settings = const GuillotineSettings(),
-  })  : type = TaleType.Guillotine,
-        super(key: key);
-
-  const TaleWidget.zoom({
-    Key? key,
-    required this.drawer,
-    required this.body,
-    this.settings = const GuillotineSettings(),
-  })  : type = TaleType.Zoom,
-        super(key: key);
-
+  final TaleType type;
   final Widget drawer;
   final Widget body;
-  final TaleSettings settings;
-  final TaleType type;
+  final SideState sideState;
+  final DrawerState drawerState;
+  final TaleSettings? settings;
+  final DrawerListener? listener;
+  final TaleController? controller;
 
   @override
-  TaleWidgetState createState() {
-    return ZoomDrawerWidget();
+  // ignore: no_logic_in_create_state
+  TaleDrawerState createState() {
+    switch (type) {
+      case TaleType.Flip:
+        return FlipDrawerWidget();
+      case TaleType.Guillotine:
+        return GuillotineDrawerWidget();
+      case TaleType.Zoom:
+        return ZoomDrawerWidget();
+    }
   }
 }
 
-abstract class TaleWidgetState extends State<TaleWidget>
-    with SingleTickerProviderStateMixin, AnimationControllerMixin {}
+abstract class TaleDrawerState extends State<TaleDrawer>
+    with SingleTickerProviderStateMixin, AnimationControllerMixin {
+  void initSettingsValues() {}
+}

@@ -1,6 +1,6 @@
 part of '../tale_widget.dart';
 
-class FlipDrawerWidget extends TaleWidgetState {
+class FlipDrawerWidget extends TaleDrawerState {
   @override
   Widget build(BuildContext context) {
     return Container(

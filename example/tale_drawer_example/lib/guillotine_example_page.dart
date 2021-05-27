@@ -15,19 +15,8 @@ class GuillotineExamplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        GuillotineDrawer(
-          controller: controller,
-          backgroundColor: const Color(0xff2E2C3C),
-          appBar: const AppBarWidget(),
-          iconMenu: GestureDetector(
-            onTap: () {
-              controller.start();
-            },
-            child: const Icon(
-              Icons.menu_sharp,
-              color: Colors.white,
-            ),
-          ),
+        TaleDrawer(
+          type: TaleType.Guillotine,
           body: Container(
             child: const Center(
               child: Text(
@@ -36,15 +25,38 @@ class GuillotineExamplePage extends StatelessWidget {
             ),
           ),
           drawer: const ContentWidget(),
-          listener: DrawerListener(
-            onOpen: () {
-              print('OnOpen');
-            },
-            onClose: () {
-              print('OnClose');
-            },
-          ),
+          settings: GuillotineSettings(),
         ),
+        // GuillotineDrawer(
+        //   controller: controller,
+        //   backgroundColor: const Color(0xff2E2C3C),
+        //   appBar: const AppBarWidget(),
+        //   iconMenu: GestureDetector(
+        //     onTap: () {
+        //       controller.start();
+        //     },
+        //     child: const Icon(
+        //       Icons.menu_sharp,
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        //   body: Container(
+        //     child: const Center(
+        //       child: Text(
+        //         'Body Example',
+        //       ),
+        //     ),
+        //   ),
+        //   drawer: const ContentWidget(),
+        //   listener: DrawerListener(
+        //     onOpen: () {
+        //       print('OnOpen');
+        //     },
+        //     onClose: () {
+        //       print('OnClose');
+        //     },
+        //   ),
+        // ),
         Positioned(
           bottom: 0,
           child: RunActionsWidget(controller: controller),
