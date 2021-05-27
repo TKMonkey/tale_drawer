@@ -95,7 +95,7 @@ abstract class TaleDrawerState extends State<TaleDrawer>
   bool get isStartedOpen => widget.drawerState == DrawerState.OPEN;
 
   Alignment get centerAligment =>
-      isLeftSide ? Alignment.centerLeft : Alignment.centerRight;
+      isLeftSide ? Alignment.centerRight : Alignment.centerLeft;
 
   Alignment get topAligment =>
       isLeftSide ? Alignment.centerLeft : Alignment.centerRight;

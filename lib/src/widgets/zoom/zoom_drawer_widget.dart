@@ -3,8 +3,11 @@ part of '../tale_widget.dart';
 class ZoomDrawerWidget extends TaleDrawerState {
   double value = 0.0;
 
+  late double addSizeForRightSide;
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
@@ -14,7 +17,7 @@ class ZoomDrawerWidget extends TaleDrawerState {
           ),
           ZoomDrawerBody(
             animationController: animationController,
-            delta: delta,
+            slideSize: delta * slideSize(size.width),
             settings: settings,
             centerAligment: centerAligment,
             body: widget.body,
@@ -64,10 +67,16 @@ class ZoomDrawerWidget extends TaleDrawerState {
   @override
   void initControllFlags() {
     animationController.value = !isStartedOpen ? 0.0 : 1.0;
-    delta = isLeftSide ? 1.0 : -1.0;
+    delta = isLeftSide ? -1.0 : 1.0;
+    addSizeForRightSide = isLeftSide ? 1.0 : 0.0;
   }
 
   @override
   ZoomSettings get settings =>
       (widget.settings ?? const ZoomSettings()) as ZoomSettings;
+
+  double slideSize(double width) => settings.maxSlide + addRotationSlide(width);
+
+  double addRotationSlide(double width) =>
+      width * settings.rotation.abs() / 100;
 }

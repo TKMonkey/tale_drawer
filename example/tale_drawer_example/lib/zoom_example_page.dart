@@ -38,12 +38,8 @@ class ZoomExamplePage extends StatelessWidget {
         ),
       ),
       drawer: const ContentWidget(),
-      sideState: SideState.RIGHT,
-      settings: ZoomSettings(
-        rotation: -10,
-        showShadows: true,
-        shadowColor: Colors.green,
-      ),
+      sideState: SideState.LEFT,
+      settings: ZoomSettings(),
     );
   }
 }
