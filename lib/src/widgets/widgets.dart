@@ -1,7 +1,7 @@
-export 'flip/drawer_animation.dart';
-export 'flip/flip_drawer.dart';
+export 'old/flip/drawer_animation.dart';
+export 'old/flip/flip_drawer.dart';
 
-export 'guillotine/guillotine_drawer.dart';
-export 'guillotine/guillotine_settings.dart';
+export 'old/guillotine/guillotine_drawer.dart';
+export 'old/guillotine/guillotine_settings.dart';
 
-export 'zoom/zoom_drawer.dart';
+export 'old/zoom/zoom_drawer.dart';

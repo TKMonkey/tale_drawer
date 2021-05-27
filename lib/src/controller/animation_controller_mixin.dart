@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 
-mixin ControllerMethods {
+mixin AnimationControllerMixin {
   late AnimationController animationController;
 
   void open() {

@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:tale_drawer/src/controller/drawer_controller.dart';
-import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
-import 'package:tale_drawer/src/drawer_states.dart';
+import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
+import 'package:tale_drawer/src/controller/tale_controller.dart';
+import 'package:tale_drawer/src/config/drawer_states.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
 import 'components/body_component.dart';
@@ -37,14 +37,14 @@ class FlipDrawer extends StatefulWidget {
   final bool toggleToClose;
   final DrawerAnimation type;
   final DrawerListener? listener;
-  final TaleDrawerController? controller;
+  final TaleController? controller;
 
   @override
   _FlipDrawerState createState() => _FlipDrawerState();
 }
 
 class _FlipDrawerState extends State<FlipDrawer>
-    with SingleTickerProviderStateMixin, ControllerMethods {
+    with SingleTickerProviderStateMixin, AnimationControllerMixin {
   late Animation<double> animationFlip;
   late Animation<double> animationTranslate;
 

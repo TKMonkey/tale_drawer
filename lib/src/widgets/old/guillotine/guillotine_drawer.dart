@@ -4,9 +4,9 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tale_drawer/src/controller/drawer_controller.dart';
-import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
-import 'package:tale_drawer/src/drawer_states.dart';
+import 'package:tale_drawer/src/controller/tale_controller.dart';
+import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
+import 'package:tale_drawer/src/config/drawer_states.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
@@ -35,14 +35,14 @@ class GuillotineDrawer extends StatefulWidget {
   final Color backgroundColor;
   final GuillotineSettings settings;
   final DrawerListener? listener;
-  final TaleDrawerController? controller;
+  final TaleController? controller;
 
   @override
   _GuillotineDrawerState createState() => _GuillotineDrawerState();
 }
 
 class _GuillotineDrawerState extends State<GuillotineDrawer>
-    with SingleTickerProviderStateMixin, ControllerMethods {
+    with SingleTickerProviderStateMixin, AnimationControllerMixin {
   late Animation<double> animationGuillotine;
   late Animation<double> animationIcon;
   late Animation<double> animationAppBarOppacity;

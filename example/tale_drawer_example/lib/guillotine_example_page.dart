@@ -9,7 +9,7 @@ class GuillotineExamplePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final controller = TaleDrawerController();
+  final controller = TaleController();
 
   @override
   Widget build(BuildContext context) {

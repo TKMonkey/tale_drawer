@@ -7,7 +7,7 @@ class RunActionsWidget extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final TaleDrawerController controller;
+  final TaleController controller;
 
   @override
   Widget build(BuildContext context) {

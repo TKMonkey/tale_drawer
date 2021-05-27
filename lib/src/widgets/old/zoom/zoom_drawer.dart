@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:tale_drawer/src/controller/mixn_controller_methods.dart';
-import 'package:tale_drawer/src/drawer_states.dart';
+import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
+import 'package:tale_drawer/src/config/drawer_states.dart';
 
 class ZoomDrawer extends StatefulWidget {
   const ZoomDrawer({
@@ -31,7 +31,7 @@ class ZoomDrawer extends StatefulWidget {
 }
 
 class _ZoomDrawerState extends State<ZoomDrawer>
-    with SingleTickerProviderStateMixin, ControllerMethods {
+    with SingleTickerProviderStateMixin, AnimationControllerMixin {
   double value = 0.0;
 
   late bool leftSide;
@@ -68,8 +68,8 @@ class _ZoomDrawerState extends State<ZoomDrawer>
             final contentScale = 1.0 - (0.3 * animValue);
             return Transform(
               transform: Matrix4.translationValues(slideAmount, 0, 0)
-                ..rotateZ(animValue * degToRad(15))
-                ..scale(contentScale, contentScale),
+                ..rotateZ(animValue * degToRad(5))
+                ..scale(contentScale, contentScale + 0.1),
               alignment:
                   leftSide ? Alignment.centerLeft : Alignment.centerRight,
               child: AnimatedContainer(

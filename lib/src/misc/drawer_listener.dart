@@ -2,10 +2,15 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 
 class DrawerListener {
-  DrawerListener({this.onOpen, this.onClose});
+  DrawerListener({
+    this.onOpen,
+    this.onClose,
+    this.onAnimated,
+  });
 
   final VoidCallback? onOpen;
   final VoidCallback? onClose;
+  final ValueChanged<double>? onAnimated;
 }
 
 void statusListener(AnimationStatus status, DrawerListener? listener) {
