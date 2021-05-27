@@ -1,16 +1,17 @@
 // import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/config/config.dart';
+import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
+import 'package:tale_drawer/src/controller/tale_controller.dart';
+import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
-import 'config/config.dart';
+import 'zoom/zoom_drawer_body.dart';
+import 'zoom/zoom_drawer_content.dart';
 
-import 'controller/animation_controller_mixin.dart';
-import 'controller/tale_controller.dart';
-import 'misc/drawer_listener.dart';
-
-part 'widgets/flip_drawer_widget.dart';
-part 'widgets/guillotine_drawer_widget.dart';
-part 'widgets/zoom_drawer_widget.dart';
+part 'flip/flip_drawer_widget.dart';
+part 'guillotine/guillotine_drawer_widget.dart';
+part 'zoom/zoom_drawer_widget.dart';
 
 class TaleDrawer extends StatefulWidget {
   const TaleDrawer({
@@ -58,9 +59,6 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, AnimationControllerMixin {
   void initControllFlags();
   void initAnimations();
-
-  bool get isLeftSide => widget.sideState == SideState.LEFT;
-  bool get isStartedOpen => widget.drawerState == DrawerState.OPEN;
   TaleSettings get settings;
 
   late double delta;
@@ -91,4 +89,14 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     animationController.dispose();
     super.dispose();
   }
+
+  bool get isLeftSide => widget.sideState == SideState.LEFT;
+
+  bool get isStartedOpen => widget.drawerState == DrawerState.OPEN;
+
+  Alignment get centerAligment =>
+      isLeftSide ? Alignment.centerLeft : Alignment.centerRight;
+
+  Alignment get topAligment =>
+      isLeftSide ? Alignment.centerLeft : Alignment.centerRight;
 }

@@ -11,34 +11,38 @@ class ZoomExamplePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: TaleDrawer(
-        type: TaleType.Zoom,
-        body: Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color(0xff2E2C3C),
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {
-                // controller.start();
-              },
-            ),
-            title: Text('Flip Example'),
+    return TaleDrawer(
+      type: TaleType.Zoom,
+      body: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xff2E2C3C),
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              // controller.start();
+            },
           ),
-          body: Stack(
-            children: [
-              Container(
-                color: Colors.white,
-                child: Center(child: Text('Hello')),
-              ),
-              // Positioned(
-              //   bottom: 0,
-              //   child: RunActionsWidget(controller: controller),
-              // )
-            ],
-          ),
+          title: Text('Flip Example'),
         ),
-        drawer: const ContentWidget(),
+        body: Stack(
+          children: [
+            Container(
+              color: Colors.white,
+              child: Center(child: Text('Hello')),
+            ),
+            // Positioned(
+            //   bottom: 0,
+            //   child: RunActionsWidget(controller: controller),
+            // )
+          ],
+        ),
+      ),
+      drawer: const ContentWidget(),
+      sideState: SideState.RIGHT,
+      settings: ZoomSettings(
+        rotation: -10,
+        showShadows: true,
+        shadowColor: Colors.green,
       ),
     );
   }
