@@ -18,20 +18,20 @@ import 'guillotine_settings.dart';
 class GuillotineDrawer extends StatefulWidget {
   const GuillotineDrawer({
     Key? key,
-    this.iconMenu,
-    this.appBar,
     required this.body,
     required this.drawer,
+    this.iconMenu,
+    this.appBar,
     this.backgroundColor = const Color(0xff2E2C3C),
     this.settings = const GuillotineSettings(),
     this.listener,
     this.controller,
   }) : super(key: key);
 
-  final Widget? appBar;
-  final Widget? iconMenu;
   final Widget body;
   final Widget drawer;
+  final Widget? appBar;
+  final Widget? iconMenu;
   final Color backgroundColor;
   final GuillotineSettings settings;
   final DrawerListener? listener;
