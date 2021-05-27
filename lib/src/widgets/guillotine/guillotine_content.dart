@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-class DrawerContentWidget extends StatelessWidget {
-  const DrawerContentWidget({
+class GuillotineContent extends StatelessWidget {
+  const GuillotineContent({
     Key? key,
     required this.drawerContent,
     required this.animationGuillotine,
     required this.animationContentOppacity,
     required this.barSize,
-    required this.width,
-    required this.height,
     required this.hideAppBar,
-    required this.leftSide,
+    required this.topAligment,
     required this.backgroundColor,
   }) : super(key: key);
 
@@ -18,21 +16,20 @@ class DrawerContentWidget extends StatelessWidget {
   final Animation<double> animationGuillotine;
   final Animation<double> animationContentOppacity;
   final double barSize;
-  final double width;
-  final double height;
   final bool hideAppBar;
-  final bool leftSide;
   final Color backgroundColor;
+  final Alignment topAligment;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Transform.rotate(
       angle: animationGuillotine.value,
       origin: Offset(0, barSize),
-      alignment: leftSide ? Alignment.topLeft : Alignment.topRight,
+      alignment: topAligment,
       child: SizedBox(
-        width: width,
-        height: height,
+        width: size.width,
+        height: size.height,
         child: Padding(
           padding: EdgeInsets.only(
             top: hideAppBar ? 0.0 : barSize,

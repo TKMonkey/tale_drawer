@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ContentWidget extends StatelessWidget {
-  const ContentWidget({Key? key}) : super(key: key);
+  const ContentWidget({Key? key, this.alignment = Alignment.center})
+      : super(key: key);
+
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Center(
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 100),
         child: SizedBox(
           width: 180,
           child: Column(

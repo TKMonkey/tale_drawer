@@ -1,21 +1,113 @@
 part of '../tale_widget.dart';
 
 class GuillotineDrawerWidget extends TaleDrawerState {
+  late Animation<double> animationGuillotine;
+  late Animation<double> animationIcon;
+  late Animation<double> animationAppBarOppacity;
+  late Animation<double> animationContentOppacity;
+
+  double rotation = 1;
+
   @override
   Widget build(BuildContext context) {
-    print('Guillotine');
-    return Container(
-      child: Center(
-        child: Text('Hello'),
+    final barSize = settings.noAppBar
+        ? 0.0
+        : MediaQuery.of(context).padding.top + kToolbarHeight;
+
+    return Scaffold(
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) => Stack(
+          children: [
+            widget.body,
+            Stack(
+              children: [
+                GuillotineContent(
+                  drawerContent: widget.drawer,
+                  animationGuillotine: animationGuillotine,
+                  animationContentOppacity: animationContentOppacity,
+                  barSize: barSize,
+                  hideAppBar: settings.hideAppBar,
+                  topAligment: topAligment,
+                  backgroundColor: widget.drawerBackground,
+                ),
+                Positioned(
+                  left: isLeftSide ? 0.0 : null,
+                  right: !isLeftSide ? 0.0 : null,
+                  child: GuillotineAppbar(
+                    animationAppBarOppacity: animationAppBarOppacity,
+                    animationGuillotine: animationGuillotine,
+                    barSize: barSize,
+                    delta: delta,
+                    quarterTurns: isLeftSide ? 0 : 2,
+                    topAligment: topAligment,
+                    settings: settings,
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              left: isLeftSide ? 0.0 : null,
+              right: !isLeftSide ? 0.0 : null,
+              child: GuillotineMenuIcon(
+                animationIcon: animationIcon,
+                delta: delta,
+                settings: settings,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   @override
-  void initAnimations() {}
+  void initAnimations() {
+    animationGuillotine = Tween(begin: delta / 2, end: 0.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Interval(
+          0.0,
+          0.8,
+          curve: settings.guillotineCurveOut,
+        ),
+        reverseCurve: Interval(
+          0.0,
+          0.8,
+          curve: settings.guillotineCurveIn,
+        ),
+      ),
+    );
+
+    animationIcon = Tween(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: settings.iconCurve,
+      ),
+    );
+
+    animationAppBarOppacity = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.0, 0.27),
+        reverseCurve: const Interval(0.6, 0.67),
+      ),
+    );
+
+    animationContentOppacity = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.27, 0.3),
+        reverseCurve: const Interval(0.7, 0.72),
+      ),
+    );
+  }
 
   @override
-  void initControllFlags() {}
+  void initControllFlags() {
+    rotation = isLeftSide ? -1.0 : 1.0;
+    delta = rotation * math.pi;
+  }
 
   @override
   GuillotineSettings get settings =>

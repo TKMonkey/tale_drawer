@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/config/guillotine_settings.dart';
 
-class MenuIconWidget extends StatelessWidget {
-  const MenuIconWidget({
+class GuillotineMenuIcon extends StatelessWidget {
+  const GuillotineMenuIcon({
     Key? key,
     required this.animationIcon,
-    this.iconMenu,
-    required this.rotateIconMenu,
+    required this.settings,
     required this.delta,
   }) : super(key: key);
 
   final Animation<double> animationIcon;
-  final Widget? iconMenu;
-  final bool rotateIconMenu;
   final double delta;
+
+  final GuillotineSettings settings;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: iconMenu != null,
+      visible: settings.menuVisible,
       child: FittedBox(
         alignment: Alignment.topLeft,
         child: SafeArea(
@@ -26,7 +26,7 @@ class MenuIconWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Transform.rotate(
               angle: iconRotateAngle,
-              child: iconMenu,
+              child: settings.iconMenu,
             ),
           ),
         ),
@@ -35,5 +35,5 @@ class MenuIconWidget extends StatelessWidget {
   }
 
   double get iconRotateAngle =>
-      rotateIconMenu ? -delta * animationIcon.value : 0.0;
+      settings.rotateIconMenu ? -delta * animationIcon.value : 0.0;
 }

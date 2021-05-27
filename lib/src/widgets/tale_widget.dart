@@ -1,4 +1,4 @@
-// import 'dart:math' as math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/config.dart';
@@ -6,8 +6,12 @@ import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
-import 'zoom/zoom_drawer_body.dart';
-import 'zoom/zoom_drawer_content.dart';
+import 'guillotine/guillotine_app_bar.dart';
+import 'guillotine/guillotine_content.dart';
+import 'guillotine/guillotine_menu_icon.dart';
+
+import 'zoom/zoom_body.dart';
+import 'zoom/zoom_content.dart';
 
 part 'flip/flip_drawer_widget.dart';
 part 'guillotine/guillotine_drawer_widget.dart';
@@ -81,6 +85,7 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     initControllFlags();
     initAnimations();
 
+    animationController.value = isStartedOpen ? 1.0 : 0.0;
     widget.controller?.addState(this);
   }
 
@@ -98,5 +103,5 @@ abstract class TaleDrawerState extends State<TaleDrawer>
       isLeftSide ? Alignment.centerRight : Alignment.centerLeft;
 
   Alignment get topAligment =>
-      isLeftSide ? Alignment.centerLeft : Alignment.centerRight;
+      isLeftSide ? Alignment.topLeft : Alignment.topRight;
 }

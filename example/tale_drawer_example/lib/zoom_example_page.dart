@@ -4,6 +4,8 @@ import 'package:tale_drawer/tale_drawer.dart';
 import 'misc/content_widget.dart';
 import 'misc/run_actions_widget.dart';
 
+const side = SideState.RIGHT;
+
 class ZoomExamplePage extends StatelessWidget {
   const ZoomExamplePage({
     Key? key,
@@ -37,8 +39,12 @@ class ZoomExamplePage extends StatelessWidget {
           ],
         ),
       ),
-      drawer: const ContentWidget(),
-      sideState: SideState.LEFT,
+      drawer: ContentWidget(
+        alignment: side == SideState.LEFT
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
+      ),
+      sideState: side,
       settings: ZoomSettings(),
     );
   }

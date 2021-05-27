@@ -1,60 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/config/guillotine_settings.dart';
 
-class AppbarWidget extends StatelessWidget {
-  const AppbarWidget({
+class GuillotineAppbar extends StatelessWidget {
+  const GuillotineAppbar({
     Key? key,
-    this.appBar,
     required this.animationAppBarOppacity,
     required this.animationGuillotine,
-    required this.noBar,
     required this.barSize,
-    required this.width,
-    required this.height,
-    required this.hideAppBar,
     required this.delta,
-    required this.leftSide,
+    required this.quarterTurns,
+    required this.topAligment,
+    required this.settings,
   }) : super(key: key);
 
-  final Widget? appBar;
   final Animation<double> animationAppBarOppacity;
   final Animation<double> animationGuillotine;
-  final bool noBar;
   final double barSize;
-  final double width;
-  final double height;
-  final bool hideAppBar;
   final double delta;
-  final bool leftSide;
+  final int quarterTurns;
+  final Alignment topAligment;
+
+  final GuillotineSettings settings;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Visibility(
-      visible: !noBar,
+      visible: !settings.noAppBar,
       child: FadeTransition(
-        opacity:
-            hideAppBar ? animationAppBarOppacity : kAlwaysCompleteAnimation,
+        opacity: settings.hideAppBar
+            ? animationAppBarOppacity
+            : kAlwaysCompleteAnimation,
         child: Transform.rotate(
           angle: appBarRotateAngle,
           origin: Offset(0, barSize),
-          alignment: leftSide ? Alignment.topLeft : Alignment.topRight,
+          alignment: topAligment,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: barSize),
             child: RotatedBox(
               quarterTurns: 1,
               child: SizedBox(
-                width: height,
+                width: size.height,
                 height: barSize,
                 child: FittedBox(
                   alignment: Alignment.topLeft,
                   child: RotatedBox(
-                    quarterTurns: leftSide ? 0 : 2,
+                    quarterTurns: quarterTurns,
                     child: SizedBox(
-                      width: width,
+                      width: size.width,
                       height: barSize,
                       child: SafeArea(
                         bottom: false,
                         child: Center(
-                          child: appBar,
+                          child: settings.appBar,
                         ),
                       ),
                     ),
@@ -69,5 +67,5 @@ class AppbarWidget extends StatelessWidget {
   }
 
   double get appBarRotateAngle =>
-      hideAppBar ? animationGuillotine.value : delta / 2;
+      settings.hideAppBar ? animationGuillotine.value : delta / 2;
 }
