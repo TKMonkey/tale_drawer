@@ -22,5 +22,6 @@ mixin AnimationControllerMixin {
 
   bool get isDrawerOpen => animationController.value == 1.0;
   bool get isDrawerClosed => animationController.value == 0.0;
+  bool get isAnimating => animationController.isAnimating;
   double get drawerPosition => animationController.value;
 }

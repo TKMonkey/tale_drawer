@@ -20,3 +20,7 @@ void statusListener(AnimationStatus status, DrawerListener? listener) {
     listener?.onClose?.call();
   }
 }
+
+void statusListenerAnimated(double value, DrawerListener? listener) {
+  listener?.onAnimated?.call(value);
+}

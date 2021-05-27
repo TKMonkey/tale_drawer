@@ -51,5 +51,59 @@ class TaleDrawer extends StatefulWidget {
 
 abstract class TaleDrawerState extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, AnimationControllerMixin {
-  void initSettingsValues() {}
+  void initControllFlags();
+  void initAnimations();
+
+  bool get isLeftSide => widget.sideState == SideState.LEFT;
+  bool get isStartedOpen => widget.drawerState == DrawerState.OPEN;
+  late TaleSettings settings;
+
+  late double delta;
+
+  @override
+  void initState() {
+    super.initState();
+    initSettingsValues();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: settings.duration,
+    )
+      ..addStatusListener((s) => statusListener(s, widget.listener))
+      ..addListener(() {
+        if (animationController.isAnimating) {
+          statusListenerAnimated(animationController.value, widget.listener);
+        }
+      });
+
+    initControllFlags();
+    initAnimations();
+
+    widget.controller?.addState(this);
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  void initSettingsValues() {
+    if (widget.settings != null) {
+      settings = widget.settings!;
+      return;
+    }
+
+    switch (widget.type) {
+      case TaleType.Flip:
+        settings = const FlipSettings();
+        break;
+      case TaleType.Guillotine:
+        settings = const GuillotineSettings();
+        break;
+      case TaleType.Zoom:
+        settings = const ZoomSettings();
+        break;
+    }
+  }
 }

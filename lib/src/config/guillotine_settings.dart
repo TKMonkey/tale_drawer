@@ -5,7 +5,6 @@ import 'tale_settings.dart';
 
 class GuillotineSettings implements TaleSettings {
   const GuillotineSettings({
-    this.duration = const Duration(milliseconds: 1000),
     this.iconCurve = Curves.linear,
     this.guillotineCurveIn = Curves.bounceIn,
     this.guillotineCurveOut = Curves.bounceOut,
@@ -15,7 +14,6 @@ class GuillotineSettings implements TaleSettings {
     this.hideAppBar = true,
   });
 
-  final Duration duration;
   final Curve iconCurve;
   final Curve guillotineCurveIn;
   final Curve guillotineCurveOut;
@@ -23,4 +21,7 @@ class GuillotineSettings implements TaleSettings {
   final DrawerState drawerState;
   final bool rotateIconMenu;
   final bool hideAppBar;
+
+  @override
+  Duration get duration => const Duration(milliseconds: 1000);
 }

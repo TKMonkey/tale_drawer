@@ -9,4 +9,14 @@ class ZoomDrawerWidget extends TaleDrawerState {
       ),
     );
   }
+
+  @override
+  void initAnimations() {
+    // TODO: implement initAnimations
+  }
+
+  @override
+  void initControllFlags() {
+    // TODO: implement initControllFlags
+  }
 }
