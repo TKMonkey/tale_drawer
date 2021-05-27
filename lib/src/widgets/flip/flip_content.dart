@@ -7,24 +7,26 @@ class FlipContent extends StatelessWidget {
     required this.drawerContent,
     required this.animationTranslate,
     required this.animationFlip,
+    required this.animationColor,
     required this.type,
     required this.delta,
     required this.rotate,
-    required this.centerAligment,
+    required this.isLeftSide,
     required this.drawerWidth,
-    required this.wSize,
+    required this.addSizeInRight,
     required this.translate,
   }) : super(key: key);
 
   final Widget drawerContent;
   final Animation<double> animationTranslate;
   final Animation<double> animationFlip;
+  final Animation<Color?> animationColor;
   final DrawerAnimation type;
   final double delta;
   final double rotate;
-  final Alignment centerAligment;
+  final bool isLeftSide;
   final double drawerWidth;
-  final double wSize;
+  final double addSizeInRight;
   final double translate;
 
   @override
@@ -39,7 +41,7 @@ class FlipContent extends StatelessWidget {
               animationFlip.value *
               (1 - animationTranslate.value) *
               rotate),
-        alignment: centerAligment,
+        alignment: !isLeftSide ? Alignment.centerLeft : Alignment.centerRight,
         child: SizedBox(
           width: drawerWidth,
           height: size.height,
@@ -52,11 +54,11 @@ class FlipContent extends StatelessWidget {
   Offset offsetForAnimationType(Size size) {
     switch (type) {
       case DrawerAnimation.STATIC:
-        return Offset((size.width - drawerWidth) * wSize, 0);
+        return Offset((size.width - drawerWidth) * addSizeInRight, 0);
 
       default:
         return Offset(
-          (wSize * size.width) -
+          (addSizeInRight * size.width) -
               -delta * drawerWidth * (animationTranslate.value - 1 * translate),
           0,
         );

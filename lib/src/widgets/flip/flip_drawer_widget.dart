@@ -3,10 +3,11 @@ part of '../tale_widget.dart';
 class FlipDrawerWidget extends TaleDrawerState {
   late Animation<double> animationFlip;
   late Animation<double> animationTranslate;
+  late Animation<Color?> animationColor;
 
   double rotate = 1.0;
   late double translate;
-  late double wSize;
+  late double addSizeInRight;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +19,13 @@ class FlipDrawerWidget extends TaleDrawerState {
             FlipContent(
               animationTranslate: animationTranslate,
               animationFlip: animationFlip,
+              animationColor: animationColor,
               type: settings.type,
               delta: delta,
               rotate: rotate,
-              centerAligment: centerAligment,
+              isLeftSide: isLeftSide,
               drawerWidth: settings.drawerWidth,
-              wSize: wSize,
+              addSizeInRight: addSizeInRight,
               translate: translate,
               drawerContent: widget.drawer,
             ),
@@ -37,9 +39,11 @@ class FlipDrawerWidget extends TaleDrawerState {
               child: FlipBody(
                 animationTranslate: animationTranslate,
                 animationFlip: animationFlip,
+                animationColor: animationColor,
                 delta: delta,
                 drawerWidth: settings.drawerWidth,
-                centerAligment: centerAligment,
+                isLeftSide: isLeftSide,
+                settings: settings,
                 body: widget.body,
               ),
             ),
@@ -64,13 +68,23 @@ class FlipDrawerWidget extends TaleDrawerState {
       parent: animationController,
       curve: Curves.linear,
     );
+
+    animationColor = ColorTween(
+      end: settings.shadowColor,
+      begin: Colors.transparent,
+    ).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(0.0, 1.0, curve: Curves.easeInOut),
+      ),
+    );
   }
 
   @override
   void initControllFlags() {
     delta = isLeftSide ? 1.0 : -1.0;
     translate = isLeftSide ? 1.0 : 0.0;
-    wSize = delta * translate - delta;
+    addSizeInRight = isLeftSide ? 0.0 : 1.0;
 
     if (settings.type != DrawerAnimation.FLIP) {
       rotate = 0.0;

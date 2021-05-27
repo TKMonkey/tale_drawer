@@ -15,5 +15,5 @@ class ZoomSettings implements TaleSettings {
   final double addHeightScale;
 
   @override
-  Duration get duration => const Duration(milliseconds: 700);
+  Duration get duration => const Duration(milliseconds: 400);
 }

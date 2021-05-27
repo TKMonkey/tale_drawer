@@ -26,7 +26,7 @@ class ZoomExamplePage extends StatelessWidget {
               // controller.start();
             },
           ),
-          title: Text('Flip Example'),
+          title: Text('Zoom Example'),
         ),
         body: Stack(
           children: [
