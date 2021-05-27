@@ -6,6 +6,9 @@ import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
+import 'flip/flip_body.dart';
+import 'flip/flip_content.dart';
+
 import 'guillotine/guillotine_app_bar.dart';
 import 'guillotine/guillotine_content.dart';
 import 'guillotine/guillotine_menu_icon.dart';
@@ -82,10 +85,10 @@ abstract class TaleDrawerState extends State<TaleDrawer>
         }
       });
 
+    animationController.value = isStartedOpen ? 1.0 : 0.0;
     initControllFlags();
     initAnimations();
 
-    animationController.value = isStartedOpen ? 1.0 : 0.0;
     widget.controller?.addState(this);
   }
 

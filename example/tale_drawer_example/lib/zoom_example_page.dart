@@ -7,9 +7,11 @@ import 'misc/run_actions_widget.dart';
 const side = SideState.RIGHT;
 
 class ZoomExamplePage extends StatelessWidget {
-  const ZoomExamplePage({
+  ZoomExamplePage({
     Key? key,
   }) : super(key: key);
+
+  final controller = TaleController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +34,10 @@ class ZoomExamplePage extends StatelessWidget {
               color: Colors.white,
               child: Center(child: Text('Hello')),
             ),
-            // Positioned(
-            //   bottom: 0,
-            //   child: RunActionsWidget(controller: controller),
-            // )
+            Positioned(
+              bottom: 0,
+              child: RunActionsWidget(controller: controller),
+            )
           ],
         ),
       ),
@@ -46,6 +48,7 @@ class ZoomExamplePage extends StatelessWidget {
       ),
       sideState: side,
       settings: ZoomSettings(),
+      controller: controller,
     );
   }
 }

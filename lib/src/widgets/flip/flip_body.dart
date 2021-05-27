@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BodyWidget extends StatelessWidget {
-  const BodyWidget({
+class FlipBody extends StatelessWidget {
+  const FlipBody({
     Key? key,
     required this.body,
     required this.animationTranslate,
     required this.animationFlip,
     required this.delta,
     required this.drawerWidth,
-    required this.leftSide,
+    required this.centerAligment,
   }) : super(key: key);
 
   final Widget body;
@@ -16,7 +16,7 @@ class BodyWidget extends StatelessWidget {
   final Animation<double> animationFlip;
   final double delta;
   final double drawerWidth;
-  final bool leftSide;
+  final Alignment centerAligment;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class BodyWidget extends StatelessWidget {
         transform: Matrix4.identity()
           ..setEntry(3, 2, 0.001)
           ..rotateY(-delta * animationFlip.value),
-        alignment: leftSide ? Alignment.centerLeft : Alignment.centerRight,
+        alignment: centerAligment,
         child: SizedBox(
           width: size.width,
           height: size.height,

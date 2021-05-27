@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tale_drawer/src/widgets/old/flip/drawer_animation.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
-class DrawerContentWidget extends StatelessWidget {
-  const DrawerContentWidget({
+class FlipContent extends StatelessWidget {
+  const FlipContent({
     Key? key,
     required this.drawerContent,
     required this.animationTranslate,
@@ -11,7 +10,7 @@ class DrawerContentWidget extends StatelessWidget {
     required this.type,
     required this.delta,
     required this.rotate,
-    required this.leftSide,
+    required this.centerAligment,
     required this.drawerWidth,
     required this.wSize,
     required this.translate,
@@ -23,7 +22,7 @@ class DrawerContentWidget extends StatelessWidget {
   final DrawerAnimation type;
   final double delta;
   final double rotate;
-  final bool leftSide;
+  final Alignment centerAligment;
   final double drawerWidth;
   final double wSize;
   final double translate;
@@ -40,7 +39,7 @@ class DrawerContentWidget extends StatelessWidget {
               animationFlip.value *
               (1 - animationTranslate.value) *
               rotate),
-        alignment: leftSide ? Alignment.centerRight : Alignment.centerLeft,
+        alignment: centerAligment,
         child: SizedBox(
           width: drawerWidth,
           height: size.height,
