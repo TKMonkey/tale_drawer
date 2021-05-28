@@ -67,7 +67,7 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, AnimationControllerMixin {
   void initControllFlags();
   void initAnimations();
-  void initDragUtils();
+  void initDragUtils(Size size);
   TaleSettings get settings;
   late DragUtils dragUtils;
 

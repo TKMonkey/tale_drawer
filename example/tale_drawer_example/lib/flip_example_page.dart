@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 import 'package:tale_drawer_example/misc/content_widget.dart';
 
-import 'misc/run_actions_widget.dart';
-
 class FlipExamplePage extends StatelessWidget {
   FlipExamplePage({
     Key? key,
@@ -26,17 +24,9 @@ class FlipExamplePage extends StatelessWidget {
           ),
           title: Text('Flip Example'),
         ),
-        body: Stack(
-          children: [
-            Container(
-              color: Colors.white,
-              child: Center(child: Text('Hello')),
-            ),
-            Positioned(
-              bottom: 0,
-              child: RunActionsWidget(controller: controller),
-            )
-          ],
+        body: Container(
+          color: Colors.white,
+          child: Center(child: Text('Hello')),
         ),
       ),
       drawer: Container(
@@ -45,7 +35,7 @@ class FlipExamplePage extends StatelessWidget {
       ),
       controller: controller,
       drawerState: DrawerState.OPEN,
-      sideState: SideState.LEFT,
+      sideState: SideState.RIGHT,
       listener: DrawerListener(
         onOpen: () {
           print('OnOpen');

@@ -3,10 +3,11 @@ part of '../tale_widget.dart';
 class ZoomDrawerWidget extends TaleDrawerState {
   @override
   Widget build(BuildContext context) {
-    initDragUtils();
-    initControllFlags();
-
     final size = MediaQuery.of(context).size;
+
+    initControllFlags();
+    initDragUtils(size);
+
     return Scaffold(
       body: GestureDetector(
         onHorizontalDragStart: dragUtils.onDragStart,
@@ -40,11 +41,18 @@ class ZoomDrawerWidget extends TaleDrawerState {
   }
 
   @override
-  void initDragUtils() {
+  void initDragUtils(Size size) {
+    print('Drag isLeft => $isLeftSide');
+
+    final addMaxSize = isLeftSide ? 1.0 : 0.0;
+
     dragUtils = DragUtils(
       animationController: animationController,
       maxSlide: settings.maxSlide,
+      maxWith: addMaxSize * size.width,
+      delta: delta,
       dissableDrag: settings.disableDrag,
+      isLeftSide: isLeftSide,
     );
   }
 

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tale_drawer/tale_drawer.dart';
 
 import 'misc/content_widget.dart';
-import 'misc/run_actions_widget.dart';
 
-const side = SideState.LEFT;
+const side = SideState.RIGHT;
 
 class ZoomExamplePage extends StatelessWidget {
   ZoomExamplePage({
@@ -30,14 +29,7 @@ class ZoomExamplePage extends StatelessWidget {
         ),
         body: Stack(
           children: [
-            Container(
-              color: Colors.white,
-              child: Center(child: Text('Hello')),
-            ),
-            Positioned(
-              bottom: 0,
-              child: RunActionsWidget(controller: controller),
-            )
+            Center(child: Text('Hello TKMonkey')),
           ],
         ),
       ),

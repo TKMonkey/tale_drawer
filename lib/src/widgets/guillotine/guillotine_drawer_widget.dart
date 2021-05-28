@@ -109,7 +109,7 @@ class GuillotineDrawerWidget extends TaleDrawerState {
   }
 
   @override
-  void initDragUtils() {
+  void initDragUtils(Size size) {
     // No drag gor guillotine
   }
 

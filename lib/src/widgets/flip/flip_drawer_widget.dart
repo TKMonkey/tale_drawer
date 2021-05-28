@@ -10,8 +10,10 @@ class FlipDrawerWidget extends TaleDrawerState {
 
   @override
   Widget build(BuildContext context) {
-    initDragUtils();
+    final size = MediaQuery.of(context).size;
+
     initControllFlags();
+    initDragUtils(size);
 
     return Scaffold(
       body: GestureDetector(
@@ -84,11 +86,14 @@ class FlipDrawerWidget extends TaleDrawerState {
   }
 
   @override
-  void initDragUtils() {
+  void initDragUtils(Size size) {
     dragUtils = DragUtils(
       animationController: animationController,
       maxSlide: settings.drawerWidth,
+      maxWith: addSizeInRight * size.width,
+      delta: delta,
       dissableDrag: settings.disableDrag,
+      isLeftSide: !isLeftSide,
     );
   }
 
