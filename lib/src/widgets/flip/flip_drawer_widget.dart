@@ -1,7 +1,6 @@
 part of '../tale_widget.dart';
 
 class FlipDrawerWidget extends TaleDrawerState {
-  late Animation<double> animationFlip;
   late Animation<double> animationTranslate;
   late Animation<Color?> animationColor;
 
@@ -25,14 +24,12 @@ class FlipDrawerWidget extends TaleDrawerState {
           builder: (context, child) => Stack(
             children: [
               FlipContent(
-                animationTranslate: animationTranslate,
-                animationFlip: animationFlip,
+                animation: animationTranslate,
                 animationColor: animationColor,
-                type: settings.type,
-                delta: -delta,
+                settings: settings,
+                delta: delta,
                 rotate: rotate,
                 isLeftSide: isLeftSide,
-                drawerWidth: settings.drawerWidth,
                 addSizeInRight: addSizeInRight,
                 translate: translate,
                 onStart: () {
@@ -43,11 +40,9 @@ class FlipDrawerWidget extends TaleDrawerState {
                 drawerContent: widget.drawer,
               ),
               FlipBody(
-                animationTranslate: animationTranslate,
-                animationFlip: animationFlip,
+                animation: animationTranslate,
                 animationColor: animationColor,
                 delta: delta,
-                drawerWidth: settings.drawerWidth,
                 isLeftSide: isLeftSide,
                 settings: settings,
                 body: widget.body,
@@ -61,15 +56,6 @@ class FlipDrawerWidget extends TaleDrawerState {
 
   @override
   void initAnimations() {
-    animationFlip =
-        Tween(begin: 0.0, end: (settings.flipPercent / 100) * math.pi / 2)
-            .animate(
-      CurvedAnimation(
-        parent: animationController,
-        curve: Curves.easeIn,
-      ),
-    );
-
     animationTranslate = CurvedAnimation(
       parent: animationController,
       curve: Curves.linear,

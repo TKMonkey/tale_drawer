@@ -27,6 +27,5 @@ class FlipSettings implements TaleSettings {
 
 enum DrawerAnimation {
   STATIC,
-  TRANSLATE,
   FLIP,
 }

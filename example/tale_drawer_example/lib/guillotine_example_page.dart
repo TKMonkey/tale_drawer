@@ -46,6 +46,7 @@ class GuillotineExamplePage extends StatelessWidget {
               print('OnClose');
             },
           ),
+          sideState: SideState.LEFT,
         ),
         Positioned(
           bottom: 0,

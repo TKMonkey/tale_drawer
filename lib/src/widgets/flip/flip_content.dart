@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/flip_settings.dart';
 
@@ -5,30 +7,26 @@ class FlipContent extends StatelessWidget {
   const FlipContent({
     Key? key,
     required this.drawerContent,
-    required this.animationTranslate,
-    required this.animationFlip,
+    required this.animation,
     required this.animationColor,
-    required this.type,
     required this.onStart,
     required this.delta,
     required this.rotate,
     required this.isLeftSide,
-    required this.drawerWidth,
     required this.addSizeInRight,
+    required this.settings,
     required this.translate,
   }) : super(key: key);
 
   final Widget drawerContent;
-  final Animation<double> animationTranslate;
-  final Animation<double> animationFlip;
+  final Animation<double> animation;
   final Animation<Color?> animationColor;
-  final DrawerAnimation type;
   final VoidCallback onStart;
   final double delta;
   final double rotate;
   final bool isLeftSide;
-  final double drawerWidth;
   final double addSizeInRight;
+  final FlipSettings settings;
   final double translate;
 
   @override
@@ -36,23 +34,24 @@ class FlipContent extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Row(
-      children: [
+      children: isLeftSide ? elements(size) : elements(size).reversed.toList(),
+    );
+  }
+
+  List<Widget> elements(Size size) => [
         SizedBox(
-          width: drawerWidth,
+          width: settings.drawerWidth,
           height: size.height,
           child: Transform.translate(
             offset: offsetForAnimationType(size),
             child: Transform(
               transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(-delta *
-                    animationFlip.value *
-                    (1 - animationTranslate.value) *
-                    rotate),
+                ..setEntry(3, 2, 0.003)
+                ..rotateY((delta * pi / 2) * (1 - animation.value) * rotate),
               alignment:
                   !isLeftSide ? Alignment.centerLeft : Alignment.centerRight,
               child: SizedBox(
-                width: drawerWidth,
+                width: settings.drawerWidth,
                 height: size.height,
                 child: drawerContent,
               ),
@@ -62,26 +61,20 @@ class FlipContent extends StatelessWidget {
         GestureDetector(
           onTap: onStart,
           child: Container(
-            width: size.width - drawerWidth,
+            width: size.width - settings.drawerWidth,
             height: size.height,
             color: Colors.transparent,
           ),
         ),
-      ],
-    );
-  }
+      ];
 
   Offset offsetForAnimationType(Size size) {
-    switch (type) {
+    switch (settings.type) {
       case DrawerAnimation.STATIC:
-        return Offset((size.width - drawerWidth) * addSizeInRight, 0);
+        return Offset(0, 0);
 
       default:
-        return Offset(
-          (addSizeInRight * size.width) -
-              delta * drawerWidth * (animationTranslate.value - 1 * rotate),
-          0,
-        );
+        return Offset(delta * settings.drawerWidth * (animation.value - 1), 0);
     }
   }
 }
