@@ -11,32 +11,38 @@ class FlipDrawerWidget extends TaleDrawerState {
 
   @override
   Widget build(BuildContext context) {
+    initDragUtils();
+    initControllFlags();
+
     return Scaffold(
-      body: AnimatedBuilder(
-        animation: animationController,
-        builder: (context, child) => Stack(
-          children: [
-            FlipContent(
-              animationTranslate: animationTranslate,
-              animationFlip: animationFlip,
-              animationColor: animationColor,
-              type: settings.type,
-              delta: delta,
-              rotate: rotate,
-              isLeftSide: isLeftSide,
-              drawerWidth: settings.drawerWidth,
-              addSizeInRight: addSizeInRight,
-              translate: translate,
-              drawerContent: widget.drawer,
-            ),
-            GestureDetector(
-              onTap: () {
-                if (isDrawerOpen && settings.toggleToClose) {
-                  start();
-                }
-              },
-              behavior: HitTestBehavior.translucent,
-              child: FlipBody(
+      body: GestureDetector(
+        onHorizontalDragStart: dragUtils.onDragStart,
+        onHorizontalDragUpdate: dragUtils.onDragUpdate,
+        onHorizontalDragEnd: dragUtils.onDragEnd,
+        behavior: HitTestBehavior.translucent,
+        child: AnimatedBuilder(
+          animation: animationController,
+          builder: (context, child) => Stack(
+            children: [
+              FlipContent(
+                animationTranslate: animationTranslate,
+                animationFlip: animationFlip,
+                animationColor: animationColor,
+                type: settings.type,
+                delta: -delta,
+                rotate: rotate,
+                isLeftSide: isLeftSide,
+                drawerWidth: settings.drawerWidth,
+                addSizeInRight: addSizeInRight,
+                translate: translate,
+                onStart: () {
+                  if (isDrawerOpen && settings.toggleToClose) {
+                    start();
+                  }
+                },
+                drawerContent: widget.drawer,
+              ),
+              FlipBody(
                 animationTranslate: animationTranslate,
                 animationFlip: animationFlip,
                 animationColor: animationColor,
@@ -46,8 +52,8 @@ class FlipDrawerWidget extends TaleDrawerState {
                 settings: settings,
                 body: widget.body,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -89,6 +95,15 @@ class FlipDrawerWidget extends TaleDrawerState {
     if (settings.type != DrawerAnimation.FLIP) {
       rotate = 0.0;
     }
+  }
+
+  @override
+  void initDragUtils() {
+    dragUtils = DragUtils(
+      animationController: animationController,
+      maxSlide: settings.drawerWidth,
+      dissableDrag: settings.disableDrag,
+    );
   }
 
   @override

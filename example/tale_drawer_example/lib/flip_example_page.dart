@@ -44,8 +44,8 @@ class FlipExamplePage extends StatelessWidget {
         child: const ContentWidget(),
       ),
       controller: controller,
-      // drawerState: DrawerState.OPEN,
-      sideState: SideState.LEFT,
+      drawerState: DrawerState.OPEN,
+      sideState: SideState.RIGHT,
       listener: DrawerListener(
         onOpen: () {
           print('OnOpen');
@@ -56,7 +56,6 @@ class FlipExamplePage extends StatelessWidget {
       ),
       settings: FlipSettings(
         type: DrawerAnimation.FLIP,
-        flipPercent: 75,
       ),
     );
   }

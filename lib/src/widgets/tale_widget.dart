@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/config.dart';
 import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
+import 'package:tale_drawer/src/misc/drag_helper.dart';
 import 'package:tale_drawer/src/misc/drawer_listener.dart';
 
 import 'flip/flip_body.dart';
@@ -66,7 +67,9 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, AnimationControllerMixin {
   void initControllFlags();
   void initAnimations();
+  void initDragUtils();
   TaleSettings get settings;
+  late DragUtils dragUtils;
 
   late double delta;
 
@@ -86,10 +89,9 @@ abstract class TaleDrawerState extends State<TaleDrawer>
       });
 
     animationController.value = isStartedOpen ? 1.0 : 0.0;
-    initControllFlags();
-    initAnimations();
-
     widget.controller?.addState(this);
+
+    initAnimations();
   }
 
   @override

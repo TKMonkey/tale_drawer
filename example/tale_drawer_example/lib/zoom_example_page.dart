@@ -23,7 +23,7 @@ class ZoomExamplePage extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.menu),
             onPressed: () {
-              // controller.start();
+              controller.start();
             },
           ),
           title: Text('Zoom Example'),
@@ -42,7 +42,7 @@ class ZoomExamplePage extends StatelessWidget {
         ),
       ),
       drawer: ContentWidget(
-        alignment: side == SideState.LEFT
+        alignment: side == SideState.RIGHT
             ? Alignment.centerRight
             : Alignment.centerLeft,
       ),

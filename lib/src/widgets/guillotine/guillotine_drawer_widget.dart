@@ -6,10 +6,9 @@ class GuillotineDrawerWidget extends TaleDrawerState {
   late Animation<double> animationAppBarOppacity;
   late Animation<double> animationContentOppacity;
 
-  double rotation = 1;
-
   @override
   Widget build(BuildContext context) {
+    initControllFlags();
     final barSize = settings.noAppBar
         ? 0.0
         : MediaQuery.of(context).padding.top + kToolbarHeight;
@@ -23,13 +22,14 @@ class GuillotineDrawerWidget extends TaleDrawerState {
             Stack(
               children: [
                 GuillotineContent(
-                  drawerContent: widget.drawer,
                   animationGuillotine: animationGuillotine,
                   animationContentOppacity: animationContentOppacity,
                   barSize: barSize,
                   hideAppBar: settings.hideAppBar,
                   topAligment: topAligment,
                   backgroundColor: widget.drawerBackground,
+                  delta: delta,
+                  drawerContent: widget.drawer,
                 ),
                 Positioned(
                   left: isLeftSide ? 0.0 : null,
@@ -63,7 +63,7 @@ class GuillotineDrawerWidget extends TaleDrawerState {
 
   @override
   void initAnimations() {
-    animationGuillotine = Tween(begin: delta / 2, end: 0.0).animate(
+    animationGuillotine = Tween(begin: math.pi / 2, end: 0.0).animate(
       CurvedAnimation(
         parent: animationController,
         curve: Interval(
@@ -105,8 +105,12 @@ class GuillotineDrawerWidget extends TaleDrawerState {
 
   @override
   void initControllFlags() {
-    rotation = isLeftSide ? -1.0 : 1.0;
-    delta = rotation * math.pi;
+    delta = isLeftSide ? -1.0 : 1.0;
+  }
+
+  @override
+  void initDragUtils() {
+    // No drag gor guillotine
   }
 
   @override

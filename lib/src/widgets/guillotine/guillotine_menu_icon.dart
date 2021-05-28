@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/guillotine_settings.dart';
 
@@ -35,5 +37,5 @@ class GuillotineMenuIcon extends StatelessWidget {
   }
 
   double get iconRotateAngle =>
-      settings.rotateIconMenu ? -delta * animationIcon.value : 0.0;
+      settings.rotateIconMenu ? -delta * math.pi * animationIcon.value : 0.0;
 }

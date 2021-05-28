@@ -6,6 +6,7 @@ class FlipSettings implements TaleSettings {
   const FlipSettings({
     this.drawerWidth = 250.0,
     this.flipPercent = 99,
+    this.disableDrag = false,
     this.toggleToClose = true,
     this.type = DrawerAnimation.FLIP,
     this.shadowColor = Colors.black26,
@@ -14,6 +15,7 @@ class FlipSettings implements TaleSettings {
 
   final double drawerWidth;
   final double flipPercent;
+  final bool disableDrag;
   final bool toggleToClose;
   final bool showShadow;
   final Color shadowColor;

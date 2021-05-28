@@ -6,6 +6,7 @@ class GuillotineContent extends StatelessWidget {
     required this.drawerContent,
     required this.animationGuillotine,
     required this.animationContentOppacity,
+    required this.delta,
     required this.barSize,
     required this.hideAppBar,
     required this.topAligment,
@@ -15,6 +16,7 @@ class GuillotineContent extends StatelessWidget {
   final Widget drawerContent;
   final Animation<double> animationGuillotine;
   final Animation<double> animationContentOppacity;
+  final double delta;
   final double barSize;
   final bool hideAppBar;
   final Color backgroundColor;
@@ -24,7 +26,7 @@ class GuillotineContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Transform.rotate(
-      angle: animationGuillotine.value,
+      angle: delta * animationGuillotine.value,
       origin: Offset(0, barSize),
       alignment: topAligment,
       child: SizedBox(

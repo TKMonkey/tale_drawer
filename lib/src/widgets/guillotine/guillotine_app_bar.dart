@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/guillotine_settings.dart';
 
@@ -67,5 +69,5 @@ class GuillotineAppbar extends StatelessWidget {
   }
 
   double get appBarRotateAngle =>
-      settings.hideAppBar ? animationGuillotine.value : delta / 2;
+      delta * (settings.hideAppBar ? animationGuillotine.value : math.pi / 2);
 }

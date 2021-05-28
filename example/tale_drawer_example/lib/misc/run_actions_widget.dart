@@ -11,69 +11,72 @@ class RunActionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Row(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              controller.open();
-            },
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              primary: Colors.blue,
-            ),
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: Column(
-                children: [
-                  Icon(Icons.open_in_browser),
-                  Text('Open'),
-                ],
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: SafeArea(
+        child: Row(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                controller.open();
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                primary: Colors.blue,
+              ),
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Column(
+                  children: [
+                    Icon(Icons.open_in_browser),
+                    Text('Open'),
+                  ],
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              controller.close();
-            },
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              primary: Colors.blue,
-            ),
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: Column(
-                children: [
-                  Icon(Icons.close),
-                  Text('Close'),
-                ],
+            ElevatedButton(
+              onPressed: () {
+                controller.close();
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                primary: Colors.blue,
+              ),
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Column(
+                  children: [
+                    Icon(Icons.close),
+                    Text('Close'),
+                  ],
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              print('before start isOpen: ${controller.isDrawerOpen}');
-              print('before start isClosed: ${controller.isDrawerClosed}');
-              controller.start();
-            },
-            style: ElevatedButton.styleFrom(
-              shape: const CircleBorder(),
-              primary: Colors.blue,
-            ),
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: Column(
-                children: [
-                  Icon(Icons.play_arrow),
-                  Text('Start'),
-                ],
+            ElevatedButton(
+              onPressed: () {
+                print('before start isOpen: ${controller.isDrawerOpen}');
+                print('before start isClosed: ${controller.isDrawerClosed}');
+                controller.start();
+              },
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                primary: Colors.blue,
+              ),
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Column(
+                  children: [
+                    Icon(Icons.play_arrow),
+                    Text('Start'),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
