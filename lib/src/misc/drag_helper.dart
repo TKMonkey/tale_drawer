@@ -4,15 +4,15 @@ class DragUtils {
   DragUtils({
     required this.animationController,
     required this.maxSlide,
-    required this.maxWith,
-    this.delta = 1,
-    this.minDragStartEdge = 60,
+    required this.maxDragStartEdge,
+    required this.minDragStartEdge,
+    required this.delta,
     this.dissableDrag = false,
     this.isLeftSide = true,
-  }) : maxDragStartEdge = maxSlide - 16;
+  });
 
   final double maxSlide;
-  final double maxWith;
+
   final double minDragStartEdge;
   final double maxDragStartEdge;
   final double delta;
@@ -24,24 +24,13 @@ class DragUtils {
 
   void onDragStart(DragStartDetails details) {
     if (dissableDrag) return;
-
-    print('isLeftSide  -> ${isLeftSide}');
-    print('maxWith  -> ${maxWith}');
-    print('maxWith  -> ${delta}');
-    print('animationController Status -> ${animationController.status}');
-    print('DX -> ${details.localPosition.dx}');
-    print('minDragStartEdge -> $minDragStartEdge');
-    print('maxDragStartEdge -> $maxDragStartEdge');
-
     final bool isDragStartFromLeft = animationStatudisBySideLeft(!isLeftSide) &&
-        details.localPosition.dx < maxWith + delta * minDragStartEdge;
+        details.localPosition.dx < minDragStartEdge;
     final bool isDragFinishFromRight =
         animationStatudisBySideLeft(isLeftSide) &&
             details.localPosition.dx > maxDragStartEdge;
 
     canBeDragged = isDragFinishFromRight || isDragStartFromLeft;
-
-    print('canBeDragged -> $canBeDragged');
   }
 
   void onDragUpdate(DragUpdateDetails details) {

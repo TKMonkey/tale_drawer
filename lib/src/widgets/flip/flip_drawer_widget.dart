@@ -87,10 +87,13 @@ class FlipDrawerWidget extends TaleDrawerState {
 
   @override
   void initDragUtils(Size size) {
+    final removeSize = !isLeftSide ? 0.0 : 1.0;
+
     dragUtils = DragUtils(
       animationController: animationController,
       maxSlide: settings.drawerWidth,
-      maxWith: addSizeInRight * size.width,
+      maxDragStartEdge: size.width * removeSize - delta * settings.drawerWidth,
+      minDragStartEdge: addSizeInRight * size.width + delta * 60,
       delta: delta,
       dissableDrag: settings.disableDrag,
       isLeftSide: !isLeftSide,

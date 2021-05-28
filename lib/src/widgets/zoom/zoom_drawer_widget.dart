@@ -42,18 +42,27 @@ class ZoomDrawerWidget extends TaleDrawerState {
 
   @override
   void initDragUtils(Size size) {
-    print('Drag isLeft => $isLeftSide');
-
     final addMaxSize = isLeftSide ? 1.0 : 0.0;
 
     dragUtils = DragUtils(
       animationController: animationController,
       maxSlide: settings.maxSlide,
-      maxWith: addMaxSize * size.width,
+      maxDragStartEdge: settings.maxSlide,
+      minDragStartEdge: addMaxSize * size.width + delta * 60,
       delta: delta,
       dissableDrag: settings.disableDrag,
       isLeftSide: isLeftSide,
     );
+
+    // dragUtils = DragUtils(
+    //   animationController: animationController,
+    //   maxSlide: settings.maxSlide,
+    //   maxDragStartEdge: settings.maxSlide,
+    //   minDragStartEdge: addMaxSize * size.width + delta * 60,
+    //   delta: delta,
+    //   dissableDrag: settings.disableDrag,
+    //   isLeftSide: isLeftSide,
+    // );
   }
 
   @override
