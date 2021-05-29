@@ -8,7 +8,7 @@ class GuillotineContent extends StatelessWidget {
     required this.animationContentOppacity,
     required this.delta,
     required this.barSize,
-    required this.hideAppBar,
+    required this.fixedAppBar,
     required this.topAligment,
     required this.backgroundColor,
   }) : super(key: key);
@@ -18,7 +18,7 @@ class GuillotineContent extends StatelessWidget {
   final Animation<double> animationContentOppacity;
   final double delta;
   final double barSize;
-  final bool hideAppBar;
+  final bool fixedAppBar;
   final Color backgroundColor;
   final Alignment topAligment;
 
@@ -34,7 +34,7 @@ class GuillotineContent extends StatelessWidget {
         height: size.height,
         child: Padding(
           padding: EdgeInsets.only(
-            top: hideAppBar ? 0.0 : barSize,
+            top: fixedAppBar ? 0.0 : barSize,
           ),
           child: ColoredBox(
             color: backgroundColor,

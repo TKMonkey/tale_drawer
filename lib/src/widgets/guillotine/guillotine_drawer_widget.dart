@@ -25,7 +25,7 @@ class GuillotineDrawerWidget extends TaleDrawerState {
                   animationGuillotine: animationGuillotine,
                   animationContentOppacity: animationContentOppacity,
                   barSize: barSize,
-                  hideAppBar: settings.hideAppBar,
+                  fixedAppBar: settings.fixedAppBar,
                   topAligment: topAligment,
                   backgroundColor: widget.drawerBackground,
                   delta: delta,

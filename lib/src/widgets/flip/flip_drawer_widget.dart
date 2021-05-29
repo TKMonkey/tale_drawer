@@ -94,9 +94,10 @@ class FlipDrawerWidget extends TaleDrawerState {
       maxSlide: settings.drawerWidth,
       maxDragStartEdge: size.width * removeSize - delta * settings.drawerWidth,
       minDragStartEdge: addSizeInRight * size.width + delta * 60,
-      delta: delta,
       dissableDrag: settings.disableDrag,
-      isLeftSide: !isLeftSide,
+      orientation: isLeftSide
+          ? DragOrientation.LeftToRight
+          : DragOrientation.RigthtToLeft,
     );
   }
 

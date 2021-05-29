@@ -30,7 +30,7 @@ class GuillotineAppbar extends StatelessWidget {
     return Visibility(
       visible: !settings.noAppBar,
       child: FadeTransition(
-        opacity: settings.hideAppBar
+        opacity: settings.fixedAppBar
             ? animationAppBarOppacity
             : kAlwaysCompleteAnimation,
         child: Transform.rotate(
@@ -69,5 +69,5 @@ class GuillotineAppbar extends StatelessWidget {
   }
 
   double get appBarRotateAngle =>
-      delta * (settings.hideAppBar ? animationGuillotine.value : math.pi / 2);
+      delta * (settings.fixedAppBar ? animationGuillotine.value : math.pi / 2);
 }

@@ -49,20 +49,11 @@ class ZoomDrawerWidget extends TaleDrawerState {
       maxSlide: settings.maxSlide,
       maxDragStartEdge: settings.maxSlide,
       minDragStartEdge: addMaxSize * size.width + delta * 60,
-      delta: delta,
       dissableDrag: settings.disableDrag,
-      isLeftSide: isLeftSide,
+      orientation: isLeftSide
+          ? DragOrientation.RigthtToLeft
+          : DragOrientation.LeftToRight,
     );
-
-    // dragUtils = DragUtils(
-    //   animationController: animationController,
-    //   maxSlide: settings.maxSlide,
-    //   maxDragStartEdge: settings.maxSlide,
-    //   minDragStartEdge: addMaxSize * size.width + delta * 60,
-    //   delta: delta,
-    //   dissableDrag: settings.disableDrag,
-    //   isLeftSide: isLeftSide,
-    // );
   }
 
   @override
