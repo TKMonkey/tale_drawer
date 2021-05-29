@@ -6,6 +6,9 @@
 
 Collection with many drawer types, including a differents configurations to have more flexibility to implementing drawer in your Flutter applications
 
+[![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)   [![](https://img.shields.io/github/license/tkmonkey/tale_drawer)](https://github.com/TKMonkey/tale_drawer/blob/main/LICENSE)  [![](https://img.shields.io/pub/v/tale_drawer)](https://pub.dev/packages/tale_drawer)
+
+
 <p>
   <img width="205px" alt="Flip" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/flip_preview.gif"/>
   <img width="220px" alt="Guillotine" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/guillotine_preview.gif"/>

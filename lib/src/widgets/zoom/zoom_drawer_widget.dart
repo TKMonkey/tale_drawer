@@ -59,15 +59,14 @@ class ZoomDrawerWidget extends TaleDrawerState {
   void initDragUtils(Size size) {
     final addMaxSize = isLeftSide ? 1.0 : 0.0;
 
-    dragUtils = DragUtils(
+    dragUtils = TKMDragHelper(
       animationController: animationController,
       maxSlide: settings.maxSlide,
       maxDragStartEdge: settings.maxSlide,
       minDragStartEdge: addMaxSize * size.width + delta * 60,
       dissableDrag: settings.disableDrag,
-      orientation: isLeftSide
-          ? DragOrientation.RigthtToLeft
-          : DragOrientation.LeftToRight,
+      direction:
+          isLeftSide ? DragDirection.RigthtToLeft : DragDirection.LeftToRight,
     );
   }
 

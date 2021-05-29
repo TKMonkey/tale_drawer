@@ -2,10 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/config.dart';
-import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
-import 'package:tale_drawer/src/misc/drag_helper.dart';
 import 'package:tale_drawer/src/misc/tale_listener.dart';
+import 'package:tools_tkmonkey/tools_tkmonkey_flutter.dart';
 
 import 'flip/flip_body.dart';
 import 'flip/flip_content.dart';
@@ -94,13 +93,13 @@ class TaleDrawer extends StatefulWidget {
 }
 
 abstract class TaleDrawerState extends State<TaleDrawer>
-    with SingleTickerProviderStateMixin, AnimationControllerMixin {
+    with SingleTickerProviderStateMixin, TKMControllerMixin {
   void initControllFlags();
   void initAnimations();
   void initDragUtils(Size size);
 
   TaleSettings get settings;
-  late DragUtils dragUtils;
+  late TKMDragHelper dragUtils;
   late double delta;
 
   @override
@@ -127,7 +126,7 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     }
 
     animationController.value = isStartedOpen ? 1.0 : 0.0;
-    widget.controller?.addState(this);
+    widget.controller?.addState = this;
 
     initAnimations();
   }

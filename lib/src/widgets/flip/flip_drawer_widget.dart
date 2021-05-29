@@ -56,7 +56,7 @@ class FlipDrawerWidget extends TaleDrawerState {
                 addSizeInRight: addSizeInRight,
                 translate: translate,
                 onStart: () {
-                  if (isDrawerOpen && settings.toggleToClose) {
+                  if (isAnimationOpen && settings.toggleToClose) {
                     start();
                   }
                 },
@@ -110,15 +110,14 @@ class FlipDrawerWidget extends TaleDrawerState {
   void initDragUtils(Size size) {
     final removeSize = !isLeftSide ? 0.0 : 1.0;
 
-    dragUtils = DragUtils(
+    dragUtils = TKMDragHelper(
       animationController: animationController,
       maxSlide: settings.drawerWidth,
       maxDragStartEdge: size.width * removeSize - delta * settings.drawerWidth,
       minDragStartEdge: addSizeInRight * size.width + delta * 60,
       dissableDrag: settings.disableDrag,
-      orientation: isLeftSide
-          ? DragOrientation.LeftToRight
-          : DragOrientation.RigthtToLeft,
+      direction:
+          isLeftSide ? DragDirection.LeftToRight : DragDirection.RigthtToLeft,
     );
   }
 

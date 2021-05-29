@@ -1,42 +1,25 @@
-import 'animation_controller_mixin.dart';
+import 'package:tools_tkmonkey/tools_tkmonkey_flutter.dart';
 
-class TaleController<State extends AnimationControllerMixin> {
-  State? _drawerState;
+/// {@template tale_controller}
+///
+/// Using `TKMController` to create a custom Controller for the drawer
+///
+/// The controller use: Open, Close, Start and GetPosition `mixin` from `TKMController`
+/// https://github.com/TKMonkey/tools_tkmonkey_flutter
+///
+/// {@endtemplate}
 
-  // ignore: use_setters_to_change_properties
-  void addState(State guillotineState) {
-    _drawerState = guillotineState;
-  }
+class TaleController extends TKMController
+    with OpenFunction, CloseFunction, StartFunction, GetPositionFunction {
+  void open() => openFunction();
 
-  bool get isAttached => _drawerState != null;
+  void close() => closeFunction();
 
-  void close() {
-    assert(isAttached, 'TaleController must be attached to a DrawerWidget');
-    return _drawerState!.close();
-  }
+  void start() => startFunction();
 
-  void open() {
-    assert(isAttached, 'TaleController must be attached to a DrawerWidget');
-    return _drawerState!.open();
-  }
+  bool get isDrawerOpen => isOpenFunction;
 
-  void start() {
-    assert(isAttached, 'TaleController must be attached to a DrawerWidget');
-    return _drawerState!.start();
-  }
+  bool get isDrawerClosed => isClosedFunction;
 
-  bool get isDrawerOpen {
-    assert(isAttached, 'TaleController must be attached to a DrawerWidget');
-    return _drawerState!.isDrawerOpen;
-  }
-
-  bool get isDrawerClosed {
-    assert(isAttached, 'TaleController must be attached to a DrawerWidget');
-    return _drawerState!.isDrawerClosed;
-  }
-
-  double get drawerPosition {
-    assert(isAttached, "TaleController must be attached to a DrawerWidget");
-    return _drawerState!.drawerPosition;
-  }
+  double get drawerPosition => getPositionFunction;
 }

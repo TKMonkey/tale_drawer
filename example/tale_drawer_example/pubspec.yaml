@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   tale_drawer:
     path: ../../
+  tools_tkmonkey:
+    git:
+      url: git://github.com/TKMonkey/tools_tkmonkey_flutter.git
+      ref: dev
 
 dev_dependencies:
   flutter_test:
