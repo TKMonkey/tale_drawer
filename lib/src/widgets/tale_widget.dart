@@ -21,6 +21,19 @@ part 'flip/flip_drawer_widget.dart';
 part 'guillotine/guillotine_drawer_widget.dart';
 part 'zoom/zoom_drawer_widget.dart';
 
+/// {@template tale_widget}
+///
+/// Set the definition for drawer and configure the params to have a different options
+///
+/// This widget transform the `type` into a `Flip`, `Guillotine` or `Zoom`
+/// And define the states to change the animation behavior
+///
+/// `delta`: Depends of the [SideState] delta is positive or negative to change the animation behavior
+/// with this param you manipulate the direction or the animation
+///
+/// `dragUtils`: Is the helper to drag the `Flip` or `Zoom`
+///
+/// {@endtemplate}
 class TaleDrawer extends StatefulWidget {
   const TaleDrawer({
     Key? key,
@@ -39,14 +52,31 @@ class TaleDrawer extends StatefulWidget {
             (type == TaleType.Zoom && settings is ZoomSettings)),
         super(key: key);
 
+  /// The type of drawer to build `Flip`, `Guillotine`, or `Zoom`
   final TaleType type;
+
+  /// The widget that represented the content in the drawer
   final Widget drawer;
+
+  /// The Widget displayed overtop the `drawer`, like Scaffold body
   final Widget body;
+
+  /// Background of drawer content widget
   final Color drawerBackground;
+
+  /// Chooose between Left and Right side to change animation direction
   final SideState sideState;
+
+  /// Choose the drawer start open or close
   final DrawerState drawerState;
+
+  /// Set specific settings for the type of `drawer`, help to set a custom behavior for `TaleDrawer`
   final TaleSettings? settings;
+
+  /// Set listener to get updates, of changes in state
   final TaleListener? listener;
+
+  /// Create a custom controller to control the animation behavior and state  of the `drawer`
   final TaleController? controller;
 
   @override
@@ -71,7 +101,6 @@ abstract class TaleDrawerState extends State<TaleDrawer>
 
   TaleSettings get settings;
   late DragUtils dragUtils;
-
   late double delta;
 
   @override
