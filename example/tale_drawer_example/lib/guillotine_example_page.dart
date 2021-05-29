@@ -35,12 +35,15 @@ class GuillotineExamplePage extends StatelessWidget {
           ),
         ),
       ),
-      listener: DrawerListener(
+      listener: TaleListener(
         onOpen: () {
           print('OnOpen');
         },
         onClose: () {
           print('OnClose');
+        },
+        onAnimated: (v) {
+          print('onAnimated $v');
         },
       ),
       sideState: SideState.LEFT,

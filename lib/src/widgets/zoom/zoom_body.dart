@@ -2,6 +2,22 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/zoom_settings.dart';
 
+/// {@template zoom_body}
+///
+/// This widget is to create a body of [TaleDrawer] when is [ZoomDrawerWidget]
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the zoom animation
+/// Zoom animation is compose by: `Translate`, `Scale` and `RotateZ`(Optional)
+///
+/// This widget can use the `radius` param from [ZoomSettings]
+/// With this, the widget creates a Clipper when animationStarted
+///
+/// This widget can use the `rotation` param from [ZoomSettings]
+/// With this, the widget enable the `RotationZ` when animationStarted
+///
+/// {@endtemplate}
 class ZoomDrawerBody extends StatelessWidget {
   const ZoomDrawerBody({
     Key? key,

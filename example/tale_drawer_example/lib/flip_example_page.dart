@@ -36,7 +36,7 @@ class FlipExamplePage extends StatelessWidget {
       controller: controller,
       drawerState: DrawerState.OPEN,
       sideState: SideState.LEFT,
-      listener: DrawerListener(
+      listener: TaleListener(
         onOpen: () {
           print('OnOpen');
         },

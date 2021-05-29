@@ -3,6 +3,20 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/guillotine_settings.dart';
 
+/// {@template guillotine_app_bar}
+///
+/// This widget is to create a custom AppBar of [TaleDrawer] when is [GuillotineDrawerWidget]
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the appbar animation
+/// Zoom animation is compose by: `Rotate` and `Fade`
+///
+/// We use `RotateBox` to rotate the appBar in directon depends of [SideState]
+///
+///
+/// {@endtemplate}
+
 class GuillotineAppbar extends StatelessWidget {
   const GuillotineAppbar({
     Key? key,

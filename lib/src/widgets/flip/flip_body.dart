@@ -3,6 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/flip_settings.dart';
 
+/// {@template flip_body}
+///
+/// This widget is to create a body of [TaleDrawer] when is [FlipDrawerWidget]
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the flip animation
+/// Flip animation is compose by: `Translate`, `Perspective` and `Rotate` the widget
+///
+/// This widget can use the `shadowColor` param from [FlipSettings]
+/// With this, the widget creates a container to simulate a shadow effect
+///
+/// {@endtemplate}
 class FlipBody extends StatelessWidget {
   const FlipBody({
     Key? key,

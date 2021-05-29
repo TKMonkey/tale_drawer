@@ -1,5 +1,26 @@
 part of '../tale_widget.dart';
 
+/// {@template flip_drawer_widget}
+///
+/// This State for an [TaleDrawer] implementing the one `type` of drawer
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the flip
+/// In this case
+///
+/// All types of widgets split the widget into different atomic widgets
+/// In this case we split in `body` and `content`
+///
+/// We only define specific values/variables to complete the proposed
+///
+///
+/// `rotate`: Flip have two specific types, when is Static dont rotate the `content`
+/// `translate`: Flip have two specific types, when is Static dont translate the `content`
+/// `addSizeInRight`: When [SideState] is right
+///  add MediaQuery.of(context).size.width to `TKMDragHelper`
+///
+/// {@endtemplate}
 class FlipDrawerWidget extends TaleDrawerState {
   late Animation<double> animationTranslate;
   late Animation<Color?> animationColor;

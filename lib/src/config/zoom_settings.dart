@@ -8,6 +8,7 @@ import 'tale_settings.dart';
 /// {@endtemplate}
 class ZoomSettings implements TaleSettings {
   const ZoomSettings({
+    this.settings,
     this.maxSlide = 250,
     this.radius = 34,
     this.rotation = 0.0,
@@ -15,6 +16,8 @@ class ZoomSettings implements TaleSettings {
     this.addHeightScale = 0.0,
   })  : assert(rotation >= -15.0 && rotation <= 15),
         assert(addHeightScale >= 0.0 && addHeightScale <= 0.3);
+
+  final TaleSettings? settings;
 
   /// The maximum position when drag is end
   final double maxSlide;

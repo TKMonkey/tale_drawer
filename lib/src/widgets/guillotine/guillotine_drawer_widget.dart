@@ -1,5 +1,22 @@
 part of '../tale_widget.dart';
 
+/// {@template guillotine_drawer_widget}
+///
+/// This State for an [TaleDrawer] implementing the one `type` of drawer
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the guillotine
+/// In this case
+///
+/// All types of widgets split the widget into different atomic widgets
+/// In this case we split in `body`, `content`, `appBar` and `menuIcon`
+///
+/// We only define specific values/variables to complete the proposed
+///
+/// !This Widget can dragged yet
+///
+/// {@endtemplate}
 class GuillotineDrawerWidget extends TaleDrawerState {
   late Animation<double> animationGuillotine;
   late Animation<double> animationIcon;

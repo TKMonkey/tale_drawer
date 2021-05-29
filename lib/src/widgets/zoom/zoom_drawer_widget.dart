@@ -1,5 +1,20 @@
 part of '../tale_widget.dart';
 
+/// {@template zoom_drawer_widget}
+///
+/// This State for an [TaleDrawer] implementing the one `type` of drawer
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the zoom
+/// In this case
+///
+/// All types of widgets split the widget into different atomic widgets
+/// In this case we split in `body` and `content`
+///
+/// We only define specific values/variables to complete the proposed
+///
+/// {@endtemplate}
 class ZoomDrawerWidget extends TaleDrawerState {
   @override
   Widget build(BuildContext context) {

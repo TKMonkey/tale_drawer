@@ -5,7 +5,7 @@ import 'package:tale_drawer/src/config/config.dart';
 import 'package:tale_drawer/src/controller/animation_controller_mixin.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
 import 'package:tale_drawer/src/misc/drag_helper.dart';
-import 'package:tale_drawer/src/misc/drawer_listener.dart';
+import 'package:tale_drawer/src/misc/tale_listener.dart';
 
 import 'flip/flip_body.dart';
 import 'flip/flip_content.dart';
@@ -46,7 +46,7 @@ class TaleDrawer extends StatefulWidget {
   final SideState sideState;
   final DrawerState drawerState;
   final TaleSettings? settings;
-  final DrawerListener? listener;
+  final TaleListener? listener;
   final TaleController? controller;
 
   @override
@@ -68,6 +68,7 @@ abstract class TaleDrawerState extends State<TaleDrawer>
   void initControllFlags();
   void initAnimations();
   void initDragUtils(Size size);
+
   TaleSettings get settings;
   late DragUtils dragUtils;
 
@@ -80,13 +81,21 @@ abstract class TaleDrawerState extends State<TaleDrawer>
     animationController = AnimationController(
       vsync: this,
       duration: settings.duration,
-    )
-      ..addStatusListener((s) => statusListener(s, widget.listener))
-      ..addListener(() {
+    );
+
+    if (widget.listener != null &&
+        (widget.listener?.onOpen != null || widget.listener?.onClose != null)) {
+      animationController
+          .addStatusListener((s) => statusListener(s, widget.listener));
+    }
+
+    if (widget.listener != null && widget.listener?.onAnimated != null) {
+      animationController.addListener(() {
         if (animationController.isAnimating) {
           statusListenerAnimated(animationController.value, widget.listener);
         }
       });
+    }
 
     animationController.value = isStartedOpen ? 1.0 : 0.0;
     widget.controller?.addState(this);

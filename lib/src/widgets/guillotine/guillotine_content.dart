@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+/// {@template guillotine_content}
+///
+/// This widget is to create content drawer of [TaleDrawer] when is [GuillotineDrawerWidget]
+/// This widget isn't public for final users
+///
+///
+/// The purpose of this widget is to create the guillotine animation
+/// Guillotine animation is composed by: `Rotate` and `Fade`
+///
+/// This widget can use the `fixedAppBar` param from [GuillotineSettings]
+/// With this, the widget hide the AppBar or not
+///
+/// {@endtemplate}
 class GuillotineContent extends StatelessWidget {
   const GuillotineContent({
     Key? key,
