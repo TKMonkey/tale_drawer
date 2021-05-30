@@ -21,13 +21,15 @@ part of '../tale_widget.dart';
 ///  add MediaQuery.of(context).size.width to `TKMDragHelper`
 ///
 /// {@endtemplate}
-class FlipDrawerWidget extends TaleDrawerState {
+class FlipDrawerWidget extends TaleDrawerState<FlipSettings> {
   late Animation<double> animationTranslate;
   late Animation<Color?> animationColor;
 
   double rotate = 1.0;
   late double translate;
   late double addSizeInRight;
+
+  FlipDrawerWidget(FlipSettings settings) : super(settings);
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +122,4 @@ class FlipDrawerWidget extends TaleDrawerState {
           isLeftSide ? DragDirection.LeftToRight : DragDirection.RigthtToLeft,
     );
   }
-
-  @override
-  FlipSettings get settings =>
-      (widget.settings ?? const FlipSettings()) as FlipSettings;
 }

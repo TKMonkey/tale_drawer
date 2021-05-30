@@ -1,3 +1,5 @@
+import '../../tale_drawer.dart';
+
 /// {@template tale_settings}
 ///
 /// Base class for tale settings
@@ -6,4 +8,6 @@
 /// {@endtemplate}
 abstract class TaleSettings {
   Duration get duration;
+
+  TaleDrawerState createState();
 }

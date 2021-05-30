@@ -17,11 +17,13 @@ part of '../tale_widget.dart';
 /// !This Widget can dragged yet
 ///
 /// {@endtemplate}
-class GuillotineDrawerWidget extends TaleDrawerState {
+class GuillotineDrawerWidget extends TaleDrawerState<GuillotineSettings> {
   late Animation<double> animationGuillotine;
   late Animation<double> animationIcon;
   late Animation<double> animationAppBarOppacity;
   late Animation<double> animationContentOppacity;
+
+  GuillotineDrawerWidget(GuillotineSettings settings) : super(settings);
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +131,4 @@ class GuillotineDrawerWidget extends TaleDrawerState {
   void initDragUtils(Size size) {
     // No drag gor guillotine
   }
-
-  @override
-  GuillotineSettings get settings =>
-      (widget.settings ?? const GuillotineSettings()) as GuillotineSettings;
 }

@@ -13,7 +13,6 @@ class GuillotineExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TaleDrawer(
-      type: TaleType.Guillotine,
       controller: controller,
       body: Container(
         child: const Center(

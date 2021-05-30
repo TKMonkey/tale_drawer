@@ -15,7 +15,9 @@ part of '../tale_widget.dart';
 /// We only define specific values/variables to complete the proposed
 ///
 /// {@endtemplate}
-class ZoomDrawerWidget extends TaleDrawerState {
+class ZoomDrawerWidget extends TaleDrawerState<ZoomSettings> {
+  ZoomDrawerWidget(ZoomSettings settings) : super(settings);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -69,10 +71,6 @@ class ZoomDrawerWidget extends TaleDrawerState {
           isLeftSide ? DragDirection.RigthtToLeft : DragDirection.LeftToRight,
     );
   }
-
-  @override
-  ZoomSettings get settings =>
-      (widget.settings ?? const ZoomSettings()) as ZoomSettings;
 
   double slideSize(double width) => settings.maxSlide + addRotationSlide(width);
 

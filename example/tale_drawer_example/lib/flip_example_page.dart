@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/tale_drawer.dart';
-import 'package:tale_drawer_example/misc/content_widget.dart';
+
+import 'misc/content_widget.dart';
 
 class FlipExamplePage extends StatelessWidget {
   FlipExamplePage({
@@ -12,7 +13,6 @@ class FlipExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TaleDrawer(
-      type: TaleType.Flip,
       body: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff2E2C3C),

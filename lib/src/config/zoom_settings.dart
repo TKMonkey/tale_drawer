@@ -1,3 +1,5 @@
+import 'package:tale_drawer/src/widgets/tale_widget.dart';
+
 import 'tale_settings.dart';
 
 /// {@template guillotine_settings}
@@ -36,4 +38,7 @@ class ZoomSettings implements TaleSettings {
 
   @override
   Duration get duration => const Duration(milliseconds: 400);
+
+  @override
+  TaleDrawerState<TaleSettings> createState() => ZoomDrawerWidget(this);
 }

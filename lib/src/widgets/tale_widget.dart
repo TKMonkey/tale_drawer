@@ -8,11 +8,9 @@ import 'package:tools_tkmonkey/tools_tkmonkey_flutter.dart';
 
 import 'flip/flip_body.dart';
 import 'flip/flip_content.dart';
-
 import 'guillotine/guillotine_app_bar.dart';
 import 'guillotine/guillotine_content.dart';
 import 'guillotine/guillotine_menu_icon.dart';
-
 import 'zoom/zoom_body.dart';
 import 'zoom/zoom_content.dart';
 
@@ -36,23 +34,15 @@ part 'zoom/zoom_drawer_widget.dart';
 class TaleDrawer extends StatefulWidget {
   const TaleDrawer({
     Key? key,
-    required this.type,
     required this.drawer,
+    required this.settings,
     required this.body,
     this.drawerBackground = const Color(0xff2E2C3C),
     this.sideState = SideState.LEFT,
     this.drawerState = DrawerState.CLOSED,
-    this.settings,
     this.listener,
     this.controller,
-  })  : assert(settings == null ||
-            (type == TaleType.Flip && settings is FlipSettings) ||
-            (type == TaleType.Guillotine && settings is GuillotineSettings) ||
-            (type == TaleType.Zoom && settings is ZoomSettings)),
-        super(key: key);
-
-  /// The type of drawer to build `Flip`, `Guillotine`, or `Zoom`
-  final TaleType type;
+  }) : super(key: key);
 
   /// The widget that represented the content in the drawer
   final Widget drawer;
@@ -70,7 +60,7 @@ class TaleDrawer extends StatefulWidget {
   final DrawerState drawerState;
 
   /// Set specific settings for the type of `drawer`, help to set a custom behavior for `TaleDrawer`
-  final TaleSettings? settings;
+  final TaleSettings settings;
 
   /// Set listener to get updates, of changes in state
   final TaleListener? listener;
@@ -80,25 +70,22 @@ class TaleDrawer extends StatefulWidget {
 
   @override
   // ignore: no_logic_in_create_state
-  TaleDrawerState createState() {
-    switch (type) {
-      case TaleType.Flip:
-        return FlipDrawerWidget();
-      case TaleType.Guillotine:
-        return GuillotineDrawerWidget();
-      case TaleType.Zoom:
-        return ZoomDrawerWidget();
-    }
-  }
+  TaleDrawerState createState() => settings.createState();
 }
 
-abstract class TaleDrawerState extends State<TaleDrawer>
+abstract class TaleDrawerState<T extends TaleSettings> extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, TKMControllerMixin {
+  TaleDrawerState(this._settings);
+
   void initControllFlags();
+
   void initAnimations();
+
   void initDragUtils(Size size);
 
-  TaleSettings get settings;
+  final T _settings;
+
+  T get settings => _settings;
   late TKMDragHelper dragUtils;
   late double delta;
 

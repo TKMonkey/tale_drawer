@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/widgets/tale_widget.dart';
 
 import 'tale_settings.dart';
 
@@ -42,6 +43,9 @@ class FlipSettings implements TaleSettings {
 
   @override
   Duration get duration => const Duration(milliseconds: 400);
+
+  @override
+  TaleDrawerState<TaleSettings> createState() => FlipDrawerWidget(this);
 }
 
 /// Is type of animation in the [FlipDrawerWidget]
