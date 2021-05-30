@@ -11,10 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tools_tkmonkey:
-    git:
-      url: git://github.com/TKMonkey/tools_tkmonkey_flutter.git
-      ref: dev
+  tools_tkmonkey: ^0.0.1
 
 dev_dependencies:
   flutter_test:

@@ -17,7 +17,7 @@ part of '../tale_widget.dart';
 /// !This Widget can dragged yet
 ///
 /// {@endtemplate}
-class GuillotineDrawerWidget extends TaleDrawerState {
+class _GuillotineDrawerWidget extends _TaleDrawerState {
   late Animation<double> animationGuillotine;
   late Animation<double> animationIcon;
   late Animation<double> animationAppBarOppacity;
