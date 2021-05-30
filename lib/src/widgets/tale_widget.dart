@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/config.dart';
 import 'package:tale_drawer/src/controller/tale_controller.dart';
 import 'package:tale_drawer/src/misc/tale_listener.dart';
-import 'package:tools_tkmonkey/tools_tkmonkey_flutter.dart';
+import 'package:tools_tkmonkey/tools_tkmonkey.dart';
 
 import 'flip/flip_body.dart';
 import 'flip/flip_content.dart';
@@ -80,19 +80,19 @@ class TaleDrawer extends StatefulWidget {
 
   @override
   // ignore: no_logic_in_create_state
-  TaleDrawerState createState() {
+  _TaleDrawerState createState() {
     switch (type) {
       case TaleType.Flip:
-        return FlipDrawerWidget();
+        return _FlipDrawerWidget();
       case TaleType.Guillotine:
-        return GuillotineDrawerWidget();
+        return _GuillotineDrawerWidget();
       case TaleType.Zoom:
-        return ZoomDrawerWidget();
+        return _ZoomDrawerWidget();
     }
   }
 }
 
-abstract class TaleDrawerState extends State<TaleDrawer>
+abstract class _TaleDrawerState extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, TKMControllerMixin {
   void initControllFlags();
   void initAnimations();

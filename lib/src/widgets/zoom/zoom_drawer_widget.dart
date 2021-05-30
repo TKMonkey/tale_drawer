@@ -15,7 +15,7 @@ part of '../tale_widget.dart';
 /// We only define specific values/variables to complete the proposed
 ///
 /// {@endtemplate}
-class ZoomDrawerWidget extends TaleDrawerState {
+class _ZoomDrawerWidget extends _TaleDrawerState {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

@@ -10,9 +10,9 @@ Collection with many drawer types, including a differents configurations to have
 
 
 <p>
-  <img width="205px" alt="Flip" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/flip_preview.gif"/>
-  <img width="220px" alt="Guillotine" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/guillotine_preview.gif"/>
-  <img width="220px" alt="Zoom" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/zoom_preview.gif" />
+  <img width="220px" alt="Flip" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/guillotine_preview.gif?raw=true"/>
+  <img width="220px" alt="Guillotine" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/guillotine_preview.gif?raw=true"/>
+  <img width="220px" alt="Zoom" src="https://github.com/tkmonkey/tale_drawer/blob/main/img/zoom_preview.gif?raw=true" />
 </p>
 
 ## Installing

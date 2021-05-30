@@ -21,7 +21,7 @@ part of '../tale_widget.dart';
 ///  add MediaQuery.of(context).size.width to `TKMDragHelper`
 ///
 /// {@endtemplate}
-class FlipDrawerWidget extends TaleDrawerState {
+class _FlipDrawerWidget extends _TaleDrawerState {
   late Animation<double> animationTranslate;
   late Animation<Color?> animationColor;
 

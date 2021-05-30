@@ -1,4 +1,4 @@
-import 'package:tools_tkmonkey/tools_tkmonkey_flutter.dart';
+import 'package:tools_tkmonkey/tools_tkmonkey.dart';
 
 /// {@template tale_controller}
 ///
