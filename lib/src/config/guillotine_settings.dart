@@ -1,6 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:tale_drawer/src/config/config.dart';
+import 'package:tale_drawer/src/widgets/tale_drawer_state.dart';
+import 'package:tale_drawer/src/widgets/tale_widget.dart';
 
 import 'tale_settings.dart';
 
@@ -50,4 +52,10 @@ class GuillotineSettings implements TaleSettings {
 
   /// Flag for no show iconMenu
   bool get menuVisible => iconMenu != null;
+
+  @override
+  GuillotineDrawerWidget createState() => GuillotineDrawerWidget(this);
+
+  @override
+  TaleType get type => TaleType.Guillotine;
 }

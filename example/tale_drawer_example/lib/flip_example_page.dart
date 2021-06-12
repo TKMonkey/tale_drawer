@@ -12,7 +12,6 @@ class FlipExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TaleDrawer(
-      type: TaleType.Flip,
       body: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff2E2C3C),
@@ -45,7 +44,7 @@ class FlipExamplePage extends StatelessWidget {
         },
       ),
       settings: FlipSettings(
-        type: DrawerAnimation.FLIP,
+        animation: DrawerAnimation.FLIP,
       ),
     );
   }

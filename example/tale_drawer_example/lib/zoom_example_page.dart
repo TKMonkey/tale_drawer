@@ -15,7 +15,6 @@ class ZoomExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TaleDrawer(
-      type: TaleType.Zoom,
       body: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xff2E2C3C),

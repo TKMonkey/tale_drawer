@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tale_drawer/src/widgets/tale_drawer_state.dart';
 
+import '../../tale_drawer.dart';
 import 'tale_settings.dart';
 
 /// {@template flip_settings}
@@ -14,7 +16,7 @@ class FlipSettings implements TaleSettings {
     this.flipPercent = 99,
     this.disableDrag = false,
     this.toggleToClose = true,
-    this.type = DrawerAnimation.FLIP,
+    this.animation = DrawerAnimation.FLIP,
     this.shadowColor = Colors.black26,
     this.showShadow = true,
   }) : assert(flipPercent >= 75 && flipPercent <= 100);
@@ -38,10 +40,16 @@ class FlipSettings implements TaleSettings {
   final Color shadowColor;
 
   /// The flip drawer have two types of animation behavior
-  final DrawerAnimation type;
+  final DrawerAnimation animation;
 
   @override
   Duration get duration => const Duration(milliseconds: 400);
+
+  @override
+  FlipDrawerWidget createState() => FlipDrawerWidget(this);
+
+  @override
+  TaleType get type => TaleType.Flip;
 }
 
 /// Is type of animation in the [FlipDrawerWidget]

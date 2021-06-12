@@ -82,7 +82,7 @@ class FlipContent extends StatelessWidget {
       ];
 
   Offset offsetForAnimationType(Size size) {
-    switch (settings.type) {
+    switch (settings.animation) {
       case DrawerAnimation.STATIC:
         return Offset(0, 0);
 
