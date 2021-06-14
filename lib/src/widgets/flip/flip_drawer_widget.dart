@@ -56,8 +56,8 @@ class _FlipDrawerWidget extends _TaleDrawerState {
                 addSizeInRight: addSizeInRight,
                 translate: translate,
                 onStart: () {
-                  if (isAnimationOpen && settings.toggleToClose) {
-                    start();
+                  if (isAnimationCompleted && settings.toggleToClose) {
+                    run();
                   }
                 },
                 drawerContent: widget.drawer,

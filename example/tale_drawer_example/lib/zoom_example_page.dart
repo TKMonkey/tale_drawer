@@ -3,7 +3,7 @@ import 'package:tale_drawer/tale_drawer.dart';
 
 import 'misc/content_widget.dart';
 
-const side = SideState.LEFT;
+const side = SideState.RIGHT;
 
 class ZoomExamplePage extends StatelessWidget {
   ZoomExamplePage({

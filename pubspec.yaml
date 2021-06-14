@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tools_tkmonkey: ^0.0.1
-
+  tools_tkmonkey: 
+   
 dev_dependencies:
   flutter_test:
     sdk: flutter

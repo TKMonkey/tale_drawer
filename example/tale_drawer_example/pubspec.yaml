@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   tale_drawer:
     path: ../../
-  tools_tkmonkey: ^0.0.1
+  tools_tkmonkey: ^0.0.2
 
 dev_dependencies:
   flutter_test:

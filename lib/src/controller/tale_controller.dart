@@ -10,16 +10,21 @@ import 'package:tools_tkmonkey/tools_tkmonkey.dart';
 /// {@endtemplate}
 
 class TaleController extends TKMController
-    with OpenFunction, CloseFunction, StartFunction, GetPositionFunction {
-  void open() => openFunction();
+    with
+        ForwardFunction,
+        ReverseFunction,
+        RunFunction,
+        GetPositionFunction,
+        StateAnimationFunction {
+  void open() => forwardFunction();
 
-  void close() => closeFunction();
+  void close() => reverseFunction();
 
-  void start() => startFunction();
+  void start() => runFunction();
 
-  bool get isDrawerOpen => isOpenFunction;
+  bool get isDrawerOpen => isAnimationCompleted;
 
-  bool get isDrawerClosed => isClosedFunction;
+  bool get isDrawerClosed => isAnimationDismissed;
 
   double get drawerPosition => getPositionFunction;
 }
