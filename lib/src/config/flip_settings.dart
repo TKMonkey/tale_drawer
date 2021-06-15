@@ -47,9 +47,6 @@ class FlipSettings implements TaleSettings {
 
   @override
   FlipDrawerWidget createState() => FlipDrawerWidget(this);
-
-  @override
-  TaleType get type => TaleType.Flip;
 }
 
 /// Is type of animation in the [FlipDrawerWidget]

@@ -43,7 +43,4 @@ class ZoomSettings implements TaleSettings {
 
   @override
   ZoomDrawerWidget createState() => ZoomDrawerWidget(this);
-
-  @override
-  TaleType get type => TaleType.Zoom;
 }

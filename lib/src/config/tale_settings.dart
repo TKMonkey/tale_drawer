@@ -1,4 +1,3 @@
-import 'package:tale_drawer/src/config/tale_type.dart';
 import 'package:tale_drawer/src/widgets/tale_drawer_state.dart';
 
 /// {@template tale_settings}
@@ -9,8 +8,6 @@ import 'package:tale_drawer/src/widgets/tale_drawer_state.dart';
 /// {@endtemplate}
 abstract class TaleSettings {
   Duration get duration;
-
-  TaleType get type;
 
   TaleDrawerState createState();
 }

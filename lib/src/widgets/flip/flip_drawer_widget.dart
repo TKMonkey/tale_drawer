@@ -102,10 +102,6 @@ class FlipDrawerWidget extends TaleDrawerState<FlipSettings> {
     delta = isLeftSide ? 1.0 : -1.0;
     translate = isLeftSide ? 1.0 : 0.0;
     addSizeInRight = isLeftSide ? 0.0 : 1.0;
-
-    if (settings.type != DrawerAnimation.FLIP) {
-      rotate = 0.0;
-    }
   }
 
   @override

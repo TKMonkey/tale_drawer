@@ -55,7 +55,4 @@ class GuillotineSettings implements TaleSettings {
 
   @override
   GuillotineDrawerWidget createState() => GuillotineDrawerWidget(this);
-
-  @override
-  TaleType get type => TaleType.Guillotine;
 }
