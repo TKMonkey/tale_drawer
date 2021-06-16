@@ -28,7 +28,7 @@ class GuillotineDrawerWidget extends TaleDrawerState<GuillotineSettings> {
 
   @override
   Widget build(BuildContext context) {
-    initControllFlags();
+    initControlFlags();
     final barSize = settings.noAppBar
         ? 0.0
         : MediaQuery.of(context).padding.top + kToolbarHeight;
@@ -124,7 +124,7 @@ class GuillotineDrawerWidget extends TaleDrawerState<GuillotineSettings> {
   }
 
   @override
-  void initControllFlags() {
+  void initControlFlags() {
     delta = isLeftSide ? -1.0 : 1.0;
   }
 

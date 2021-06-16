@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.games_rounded),
-            label: 'Guilltine',
+            label: 'Guillotine',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

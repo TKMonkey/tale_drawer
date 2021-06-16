@@ -22,7 +22,7 @@ abstract class TaleDrawerState<T extends TaleSettings> extends State<TaleDrawer>
     with SingleTickerProviderStateMixin, TKMControllerMixin {
   final T _internalSettings;
 
-  void initControllFlags();
+  void initControlFlags();
 
   void initAnimations();
 

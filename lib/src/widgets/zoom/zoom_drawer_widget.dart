@@ -22,7 +22,7 @@ class ZoomDrawerWidget extends TaleDrawerState<ZoomSettings> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    initControllFlags();
+    initControlFlags();
     initDragUtils(size);
 
     return Scaffold(
@@ -53,7 +53,7 @@ class ZoomDrawerWidget extends TaleDrawerState<ZoomSettings> {
   void initAnimations() {}
 
   @override
-  void initControllFlags() {
+  void initControlFlags() {
     delta = isLeftSide ? -1.0 : 1.0;
   }
 

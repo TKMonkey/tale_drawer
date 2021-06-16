@@ -35,7 +35,7 @@ class FlipDrawerWidget extends TaleDrawerState<FlipSettings> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    initControllFlags();
+    initControlFlags();
     initDragUtils(size);
 
     return Scaffold(
@@ -98,7 +98,7 @@ class FlipDrawerWidget extends TaleDrawerState<FlipSettings> {
   }
 
   @override
-  void initControllFlags() {
+  void initControlFlags() {
     delta = isLeftSide ? 1.0 : -1.0;
     translate = isLeftSide ? 1.0 : 0.0;
     addSizeInRight = isLeftSide ? 0.0 : 1.0;
