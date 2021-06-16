@@ -4,7 +4,7 @@
 
 ---
 
-Collection with many drawer types, including a differents configurations to have more flexibility to implementing drawer in your Flutter applications
+Collection with many drawer types, including different configurations to have more flexibility for implementing drawer in your Flutter applications
 
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)   [![](https://img.shields.io/github/license/tkmonkey/tale_drawer)](https://github.com/TKMonkey/tale_drawer/blob/main/LICENSE)  [![](https://img.shields.io/pub/v/tale_drawer)](https://pub.dev/packages/tale_drawer)
 
@@ -25,19 +25,19 @@ dependencies:
 
 ## Basic Implementation
 
-There are two ways which the TaleDrawer can easily be added to your project.
+There are two ways in which the TaleDrawer can easily be added to your project.
 
 - Using the TaleDrawer as the root widget for the body (recommended).
 - Nesting the TaleDrawer
 
-Change the `type` between: ```TaleType.Flip, TaleType.Guillotine, TaleType.Zoom```
+Change the `settings` between: ```FlipSettings, GuillotineSettings, ZoomSettings```
 
 ```dart
 
-final type = TaleType.Zoom;
+final settings = ZoomSettings();
 
 TaleDrawer(
-  type: type,
+  settings: settings,
   body: Scaffold(
     appBar: AppBar(
       backgroundColor: const Color(0xff2E2C3C),
@@ -65,13 +65,12 @@ There are several options that allow for more control:
 
 |  Properties  |   Description   |
 |--------------|-----------------|
-| `type` | The type of drawer to build `Flip`, `Guillotine`, or `Zoom` |
-|`drawer` | The widget that represented the content in the drawer |
+|`drawer` | The widget that represents the content in the drawer |
 | `body` | The Widget displayed overtop the `drawer`, like Scaffold body|
 | `drawerBackground` | Background of drawer content widget |
-| `sideState` | Chooose between Left and Right side to change animation direction |
+| `sideState` | Choose between Left and Right side to change animation direction |
 | `drawerState` | Choose the drawer start open or close |
-| `settings` | Set specific settings for the type of `drawer`, help to set a custom behavior for `TaleDrawer` |
+| `settings` | Set specific settings for the type of `drawer`, defines the custom behavior for `TaleDrawer` |
 | `listener` | Set listener to get updates, of changes in state |
 | `controller` | Create a custom controller to control the animation behavior and state  of the `drawer` |
 
@@ -93,7 +92,7 @@ At times, it can be useful to manually change the state of the `TaleDrawer`. Thi
 |-----------|-------------|
 |`open()`|  Opens the the drawer fully |
 |`close()`| Closes the drawer fully |
-|`start()`|  Execute open or close functions depends on the situation |
+|`start()`|  Execute open or close functions depending on the current state |
 
 
 ```dart
@@ -102,7 +101,7 @@ final controller = TaleController();
 @override
 Widget build(BuildContext context) {
   return TaleDrawer(
-    type: type,
+    settings: settings,
     controller: controller,
     body: ...,
     drawer: ...,
