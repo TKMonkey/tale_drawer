@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - First Version.
 
-* TODO: Describe initial release.
+* Add Guillotine drawer.
+* Add Zoom drawer.
+* Add Flip drawer.
