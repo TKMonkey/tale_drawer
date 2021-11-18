@@ -40,7 +40,7 @@ class GuillotineMenuIcon extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Transform.rotate(
-              angle: iconRotateAngle,
+              angle: _iconRotateAngle,
               child: settings.iconMenu,
             ),
           ),
@@ -49,6 +49,6 @@ class GuillotineMenuIcon extends StatelessWidget {
     );
   }
 
-  double get iconRotateAngle =>
+  double get _iconRotateAngle =>
       settings.rotateIconMenu ? -delta * math.pi * animationIcon.value : 0.0;
 }

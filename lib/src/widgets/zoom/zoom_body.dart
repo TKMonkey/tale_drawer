@@ -41,26 +41,53 @@ class ZoomDrawerBody extends StatelessWidget {
       animation: animationController,
       builder: (context, child) => Transform(
         transform: Matrix4.identity()
-          ..translate(slideSize * animValue)
-          ..rotateZ(animValue * degToRad(settings.rotation))
-          ..scale(contentScaleX, contentScaleY),
+          ..translate(slideSize * _animValue)
+          ..rotateZ(_animValue * _degToRad(settings.rotation))
+          ..scale(_contentScaleX, _contentScaleY),
         alignment: centerAligment,
         child: ClipRRect(
-          borderRadius: startAnimated
+          borderRadius: _startAnimated
               ? BorderRadius.circular(settings.radius)
               : BorderRadius.zero,
-          child: body,
+          child: Stack(
+            children: [
+              body,
+              if (_isOpen && settings.closeOnTapBody)
+                GestureDetector(
+                  onTap: () {
+                    _run(animationController);
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
     // ..scale(contentScaleX, contentScaleY)
   }
 
-  double get animValue => animationController.value;
-  double get contentScaleX => 1.0 - (0.3 * animValue);
-  double get contentScaleY =>
-      1.0 - ((0.3 - settings.addHeightScale) * animValue);
+  double get _animValue => animationController.value;
+  double get _contentScaleX => 1.0 - (0.3 * _animValue);
+  double get _contentScaleY =>
+      1.0 - ((0.3 - settings.addHeightScale) * _animValue);
 
-  bool get startAnimated => animationController.value != 0;
-  double degToRad(double deg) => deg * (math.pi / 180.0);
+  bool get _startAnimated => animationController.value != 0;
+  double _degToRad(double deg) => deg * (math.pi / 180.0);
+  bool get _isOpen => animationController.isCompleted;
+
+  bool get _isAnimationDismissed =>
+      animationController.status == AnimationStatus.dismissed;
+  bool get _isAnimationCompleted =>
+      animationController.status == AnimationStatus.completed;
+
+  void _run(AnimationController animationController) {
+    if (_isAnimationCompleted) {
+      animationController.reverse();
+    } else if (_isAnimationDismissed) {
+      animationController.forward();
+    }
+  }
 }

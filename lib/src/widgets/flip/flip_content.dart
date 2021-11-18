@@ -47,16 +47,17 @@ class FlipContent extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Row(
-      children: isLeftSide ? elements(size) : elements(size).reversed.toList(),
+      children:
+          isLeftSide ? _elements(size) : _elements(size).reversed.toList(),
     );
   }
 
-  List<Widget> elements(Size size) => [
+  List<Widget> _elements(Size size) => [
         SizedBox(
           width: settings.drawerWidth,
           height: size.height,
           child: Transform.translate(
-            offset: offsetForAnimationType(size),
+            offset: _offsetForAnimationType(size),
             child: Transform(
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.003)
@@ -81,7 +82,7 @@ class FlipContent extends StatelessWidget {
         ),
       ];
 
-  Offset offsetForAnimationType(Size size) {
+  Offset _offsetForAnimationType(Size size) {
     switch (settings.type) {
       case DrawerAnimation.STATIC:
         return Offset(0, 0);

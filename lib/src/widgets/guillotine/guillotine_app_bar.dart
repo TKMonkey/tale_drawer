@@ -48,7 +48,7 @@ class GuillotineAppbar extends StatelessWidget {
             ? animationAppBarOppacity
             : kAlwaysCompleteAnimation,
         child: Transform.rotate(
-          angle: appBarRotateAngle,
+          angle: _appBarRotateAngle,
           origin: Offset(0, barSize),
           alignment: topAligment,
           child: Padding(
@@ -82,6 +82,6 @@ class GuillotineAppbar extends StatelessWidget {
     );
   }
 
-  double get appBarRotateAngle =>
+  double get _appBarRotateAngle =>
       delta * (settings.fixedAppBar ? animationGuillotine.value : math.pi / 2);
 }

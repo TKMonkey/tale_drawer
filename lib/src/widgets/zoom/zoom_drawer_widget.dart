@@ -36,7 +36,7 @@ class _ZoomDrawerWidget extends _TaleDrawerState {
             ),
             ZoomDrawerBody(
               animationController: animationController,
-              slideSize: delta * slideSize(size.width),
+              slideSize: delta * _slideSize(size.width),
               settings: settings,
               centerAligment: centerAligment,
               body: widget.body,
@@ -74,8 +74,9 @@ class _ZoomDrawerWidget extends _TaleDrawerState {
   ZoomSettings get settings =>
       (widget.settings ?? const ZoomSettings()) as ZoomSettings;
 
-  double slideSize(double width) => settings.maxSlide + addRotationSlide(width);
+  double _slideSize(double width) =>
+      settings.maxSlide + _addRotationSlide(width);
 
-  double addRotationSlide(double width) =>
+  double _addRotationSlide(double width) =>
       width * settings.rotation.abs() / 100;
 }

@@ -39,7 +39,9 @@ class ZoomExamplePage extends StatelessWidget {
             : Alignment.centerLeft,
       ),
       sideState: side,
-      settings: ZoomSettings(),
+      settings: ZoomSettings(
+        closeOnTapBody: true,
+      ),
       controller: controller,
     );
   }

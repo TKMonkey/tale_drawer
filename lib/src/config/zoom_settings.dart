@@ -14,6 +14,7 @@ class ZoomSettings implements TaleSettings {
     this.rotation = 0.0,
     this.disableDrag = false,
     this.addHeightScale = 0.0,
+    this.closeOnTapBody = false,
   })  : assert(rotation >= -15.0 && rotation <= 15),
         assert(addHeightScale >= 0.0 && addHeightScale <= 0.3);
 
@@ -31,8 +32,11 @@ class ZoomSettings implements TaleSettings {
   /// Change the scale for the height in [ZoomDrawerBody] when is dragged
   final double addHeightScale;
 
-  /// Flag to control de drag to open or close in the `Drawer`
+  /// Flag to control the drag to open or close in the `Drawer`
   final bool disableDrag;
+
+  /// Flag to control close the zoomDrawer when is tap in the body
+  final bool closeOnTapBody;
 
   @override
   Duration get duration => const Duration(milliseconds: 400);
